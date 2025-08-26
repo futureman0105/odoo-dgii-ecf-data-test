@@ -1,0 +1,9 @@
+## XML-SGINER
+
+this is the java server that generate the token and signe file for dgii process
+
+## app.py
+
+this is the RFCE AND E-CF test python code for DGII process
+
+
