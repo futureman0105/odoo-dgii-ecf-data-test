@@ -45,7 +45,7 @@ class RFCE_Data:
     CodigoSeguridadeCF: str = ""
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
-sheet = workbook["RFCE"]
+sheet = workbook["ECF"]
 
 def read_excel_create_rfce_xml(in_row : int) :
     rfce_data = RFCE_Data(
@@ -3279,8 +3279,8 @@ def main():
         __logger.info(f"Received token: {token}")
 
         # Step 4: Generate and sign e-CF XML        
-        xml_str = read_excel_create_rfce_xml(4)
-        # xml_str = read_excel_create_efc_xml(26)
+        # xml_str = read_excel_create_rfce_xml(4)
+        xml_str = read_excel_create_efc_xml(26)
         # xml_str = generate_dummy_dgii_xml()
         __logger.info(f"invoice xml: {xml_str}")
 
@@ -3288,8 +3288,8 @@ def main():
         __logger.info(f"signed invoice xml: {signed_xml}")
 
         # Step 5: Submit the signed e-CF XML to DGII using the token
-        response = dgii_service.submit_rcef(token)
-        # response = dgii_service.submit_ecf(token)
+        # response = dgii_service.submit_rcef(token)
+        response = dgii_service.submit_ecf(token)
         trackId = ""
         response_data = json.loads(response.content.decode('utf-8'))
 
