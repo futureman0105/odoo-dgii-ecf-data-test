@@ -3,7 +3,6 @@ import logging
 import os
 import json
 from lxml import etree
-from logger import __logger
 
 class DGIICFService:
     def __init__(self, dgii_env='test', company_id=None, env=None):
@@ -26,12 +25,14 @@ class DGIICFService:
             'prod': 'https://fc.dgii.gov.do/CerteCF'
         }[dgii_env]
         
+
         self.env = env
 
         # Fetch DGII credentials from company settings
         # company = self.env['res.company'].browse(company_id)
         self.dgii_username = "132641566"
         self.dgii_password = "RICARDO123"
+        self.invoice_name = ""
         # self.cert_password = company.dgii_cert_password
 
         # Password for private key if necessary
@@ -78,8 +79,6 @@ class DGIICFService:
                 headers=headers
             )
 
-            print(f"Validar Semilla response from DGII: {res.content}")
-
             self._logger.info(f"Validar Semilla response from DGII: {res.content}")
 
             if res.status_code == 200:
@@ -110,26 +109,27 @@ class DGIICFService:
         if type == 'semilla':
             path = os.path.join(os.path.dirname(__file__), 'data/signed.xml')
         else:
-            path = os.path.join(os.path.dirname(__file__), 'data/signed_invoice.xml')
+            path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}_signed.xml')
         
         with open(path, 'wb') as f:
                 f.write(res.content)
 
         return res.content
     
-    def sign_xml(self, xml_data):
+    def sign_xml(self, xml_data, invoice_name):
+        self.invoice_name = invoice_name
         signed_xml = self.custom_sign_xml(xml_data, type='invoice')
         return signed_xml
     
-    def submit_rcef(self, token):
+    def submit_rfce(self, token):
         """
         Submit the signed e-CF XML to DGII.
         """
-
-        xml_file_path = os.path.join(os.path.dirname(__file__), 'data/signed_invoice.xml')
+        xml_file_path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}_signed.xml')
 
         with open(xml_file_path, 'rb') as f:
-            files = {'xml': ('signed.xml', f, 'text/xml')}
+            # files = {'xml': ('signed.xml', f, 'text/xml')}
+            files = {'xml': (f'{self.invoice_name}.xml', f, 'text/xml')}
             headers = {
                 'accept': 'application/json',
                 "Authorization": f"Bearer {token}"
@@ -142,7 +142,7 @@ class DGIICFService:
                     headers=headers
                 )
 
-                self._logger.info(f"Validar Semilla response from DGII: {res.content}")
+                self._logger.info(f"RFCE response from DGII: {res.content}")
             except Exception as e:
                 self._logger.error(f"Failed Validar Semilla response from DGII: {e}")
                 return
@@ -198,3 +198,31 @@ class DGIICFService:
         self._logger.info(f"Track response from DGII: {res.content}")
 
         return res
+      
+    def track_rfce(self, token, param):
+        """
+        Track e-CF status from DGII.
+        """
+        url = "https://fc.dgii.gov.do/CerteCF/consultarfce/api/Consultas/Consulta"
+
+        headers = {
+            'accept': 'application/json',
+            "Authorization": f"Bearer {token}"
+        }
+        
+        params = {
+            "RNC_Emisor": param.RNCEmisor,
+            "ENCF": param.ENCF,
+            "Cod_Seguridad_eCF": param.CodigoSeguridadeCF
+        }
+
+        print(params, token)
+       
+        response = requests.get(f"{url}?RNC_Emisor={param.RNCEmisor}&ENCF={param.ENCF}&Cod_Seguridad_eCF={param.CodigoSeguridadeCF}", 
+                                headers=headers)
+
+        # Print response status and JSON data
+
+
+        return response
+

@@ -9,462 +9,19 @@ import requests
 
 from logger import __logger
 from dgii_client import DGIICFService
-
-@dataclass
-class RFCE_Data:
-    Version: str = ""
-    TipoeCF: str = ""
-    eNCF: str = ""
-    TipoIngresos: str = ""
-    TipoPago: str = ""
-    FormaPago: List[str] = None
-    MontoPago: List[str] = None
-    RNCEmisor: str = ""
-    RazonSocialEmisor: str = ""
-    FechaEmision: str = ""
-    RNCComprador: str = ""
-    IdentificadorExtranjero: str = ""
-    RazonSocialComprador: str = ""
-    MontoGravadoTotal: str = ""
-    MontoGravadoI1: str = ""
-    MontoGravadoI2: str = ""
-    MontoGravadoI3: str = ""
-    MontoExento: str = ""
-    TotalITBIS: str = ""
-    TotalITBIS1: str = ""
-    TotalITBIS2: str = ""
-    TotalITBIS3: str = ""
-    MontoImpuestoAdicional: str = ""
-    TipoImpuesto: List[str] = None
-    MontoImpuestoSelectivoConsumoEspecifico: List[str] = None
-    MontoImpuestoSelectivoConsumoAdvalorem: List[str] = None
-    OtrosImpuestosAdicionales: List[str] = None
-    MontoTotal: str = ""
-    MontoNoFacturable: str = ""
-    MontoPeriodo: str = ""
-    CodigoSeguridadeCF: str = ""
+from rfce import RFCEClient
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
 
-def read_excel_create_rfce_xml(in_row : int) :
-    rfce_data = RFCE_Data(
-        FormaPago=[],
-        MontoPago=[],
-        TipoImpuesto=[],
-        MontoImpuestoSelectivoConsumoEspecifico=[],
-        MontoImpuestoSelectivoConsumoAdvalorem=[],
-        OtrosImpuestosAdicionales=[]
-    )
+@dataclass
+class Param:
+    RNCEmisor: str = ""
+    ENCF: str = ""
+    CodigoSeguridadeCF: str = ""
 
-    # Read Version
-    search_text = "Version" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.Version = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'Version : {rfce_data.Version}')
-
-    # Read TipoeCF
-    search_text = "TipoeCF" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TipoeCF = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TipoeCF : {rfce_data.TipoeCF}')
-
-    # Read eNCF
-    search_text = "ENCF" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.eNCF = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'ENCF : {rfce_data.eNCF}')
-
-    # Read TipoIngresos
-    search_text = "TipoIngresos" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TipoIngresos = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TipoIngresos : {rfce_data.TipoIngresos}')
-
-    # Read TipoPago
-    search_text = "TipoPago" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TipoPago = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'Version : {rfce_data.TipoPago}')
-
-    # Read FormaDePago
-    search_text = "FormaPago[1]" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            index = 0
-
-            while True :
-                rfce_data.FormaPago.append(str(sheet.cell(in_row, col + index).value))
-                __logger.info(f'FormaPago : {str(sheet.cell(in_row, col + index).value)}')
-
-                rfce_data.MontoPago.append(str(sheet.cell(in_row, col + index + 1).value))
-                __logger.info(f'MontoPago : {str(sheet.cell(in_row, col + index + 1).value)}')
-
-                if index >= 6 :
-                    break
-                index += 1
-
-    # Read RNCEmisor
-    search_text = "RNCEmisor" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.RNCEmisor = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'RNCEmisor : {rfce_data.RNCEmisor}')
-
-    # Read RazonSocialEmisor
-    search_text = "RazonSocialEmisor" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.RazonSocialEmisor = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'RazonSocialEmisor : {rfce_data.RazonSocialEmisor}')
-
-    # Read FechaEmision
-    search_text = "FechaEmision" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.FechaEmision = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'FechaEmision : {rfce_data.FechaEmision}')
-
-    # Read RNCComprador
-    search_text = "RNCComprador" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.RNCComprador = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'RNCComprador : {rfce_data.RNCComprador}')
-
-    # Read IdentificadorExtranjero
-    search_text = "IdentificadorExtranjero" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.IdentificadorExtranjero = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'IdentificadorExtranjero : {rfce_data.IdentificadorExtranjero}')
-
-    # Read RazonSocialComprador
-    search_text = "RazonSocialComprador" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.RazonSocialComprador = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'RazonSocialComprador : {rfce_data.RazonSocialComprador}')
-
-    # Read MontoGravadoTotal
-    search_text = "MontoGravadoTotal" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoGravadoTotal = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoGravadoTotal : {rfce_data.MontoGravadoTotal}')
-
-    # Read MontoGravadoI1
-    search_text = "MontoGravadoI1" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoGravadoI1 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoGravadoI1 : {rfce_data.MontoGravadoI1}')
-
-    # Read MontoGravadoI2
-    search_text = "MontoGravadoI2" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoGravadoI2 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoGravadoI2 : {rfce_data.MontoGravadoI2}')
-
-    # Read MontoGravadoI3
-    search_text = "MontoGravadoI3" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoGravadoI3 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoGravadoI3 : {rfce_data.MontoGravadoI3}')
-
-    # Read MontoExento
-    search_text = "MontoExento" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoExento = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoExento : {rfce_data.MontoExento}')
-
-    # Read TotalITBIS
-    search_text = "TotalITBIS"
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TotalITBIS = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TotalITBIS : {rfce_data.TotalITBIS}')
-
-    # Read TotalITBIS1
-    search_text = "TotalITBIS1" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TotalITBIS1 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TotalITBIS1 : {rfce_data.TotalITBIS1}')
-
-    # Read TotalITBIS2
-    search_text = "TotalITBIS2" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TotalITBIS2 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TotalITBIS2 : {rfce_data.TotalITBIS2}')
-
-    # Read TotalITBIS3
-    search_text = "TotalITBIS3" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.TotalITBIS3 = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'TotalITBIS3 : {rfce_data.TotalITBIS3}')
-
-    # Read MontoImpuestoAdicional
-    search_text = "MontoImpuestoAdicional" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoImpuestoAdicional = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoImpuestoAdicional : {rfce_data.MontoImpuestoAdicional}')
-            
-    # Read ImpuestoAdicional
-    search_text = "TipoImpuesto[1]" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-
-            index = 0;
-            while True:
-                cell_value = str(sheet.cell(in_row, col + index).value)
-                rfce_data.TipoImpuesto.append(cell_value)
-                __logger.info(f'TipoImpuesto : {cell_value}')
-
-                cell_value = str(sheet.cell(in_row, col + index + 1).value)
-                rfce_data.MontoImpuestoSelectivoConsumoEspecifico.append(cell_value)
-                __logger.info(f'MontoImpuestoSelectivoConsumoEspecifico : {cell_value}')
-
-                cell_value = str(sheet.cell(in_row, col + index + 2).value)
-                rfce_data.MontoImpuestoSelectivoConsumoAdvalorem.append(cell_value)
-                __logger.info(f'MontoImpuestoSelectivoConsumoAdvalorem : {cell_value}')
-
-                cell_value = str(sheet.cell(in_row, col + index + 3).value)
-                rfce_data.OtrosImpuestosAdicionales.append(cell_value)
-                __logger.info(f'OtrosImpuestosAdicionales : {cell_value}')
-                if index > 3 : 
-                    break
-                index += 1
-
-    # Read MontoTotal
-    search_text = "MontoTotal" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoTotal = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoTotal : {rfce_data.MontoTotal}')
-  
-    # Read MontoNoFacturable
-    search_text = "MontoNoFacturable" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoNoFacturable = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoNoFacturable : {rfce_data.MontoNoFacturable}')
-            
-    # Read MontoPeriodo
-    search_text = "MontoPeriodo" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.MontoPeriodo = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'MontoPeriodo : {rfce_data.MontoPeriodo}')
-
-    # Read CodigoSeguridadeCF
-    search_text = "CodigoSeguridadeCF" 
-    for col in range(1, sheet.max_column + 1):
-        cell_value = sheet.cell(1, column=col).value
-        if cell_value == search_text:
-            rfce_data.CodigoSeguridadeCF = str(sheet.cell(in_row, column=col).value)
-            __logger.info(f'CodigoSeguridadeCF : {rfce_data.CodigoSeguridadeCF}')
-
-    return _generate_rfce_xml(rfce_data)
-
-def _generate_rfce_xml(rfce_data: RFCE_Data):
-    """Generate DGII-compliant XML from an Odoo invoice."""
-    # Create root element with namespaces
-    root = ET.Element('RFCE', {
-            'xmlns:xs': 'http://www.w3.org/2001/XMLSchema'
-        })
-
-    # 1. Encabezado
-    encabezado = ET.SubElement(root, 'Encabezado')
-    ET.SubElement(encabezado, 'Version').text = rfce_data.Version
-
-    # IdDoc
-    id_doc = ET.SubElement(encabezado, 'IdDoc')
-
-    __logger.info(f'eNCF :  {rfce_data.eNCF}')
-
-    ET.SubElement(id_doc, 'TipoeCF').text = rfce_data.TipoeCF
-    ET.SubElement(id_doc, 'eNCF').text = rfce_data.eNCF  # must be filled from NCF sequence
-    ET.SubElement(id_doc, 'TipoIngresos').text = rfce_data.TipoIngresos
-    ET.SubElement(id_doc, 'TipoPago').text = rfce_data.TipoPago
-    
-    # TablaFormasPago = ET.SubElement(id_doc, 'TablaFormasPago')
-
-    # for i in range(7):  
-    #     FormaDePago = ET.SubElement(TablaFormasPago, 'FormaDePago')
-    #     ET.SubElement(FormaDePago, 'FormaPago').text = rfce_data.FormaPago[i]
-    #     ET.SubElement(FormaDePago, 'MontoPago').text = rfce_data.MontoPago[i]
-       
-    emisor = ET.SubElement(encabezado, 'Emisor')
-    ET.SubElement(emisor, 'RNCEmisor').text = rfce_data.RNCEmisor or ''
-    ET.SubElement(emisor, 'RazonSocialEmisor').text = rfce_data.RazonSocialEmisor or ''
-    ET.SubElement(emisor, 'FechaEmision').text = rfce_data.FechaEmision or ''
-    
-    # Comprador (Customer)
-    comprador = ET.SubElement(encabezado, 'Comprador')
-    ET.SubElement(comprador, 'RNCComprador').text = rfce_data.RNCComprador or " "
-    
-    if rfce_data.IdentificadorExtranjero == "#e" : 
-       ET.SubElement(comprador, 'IdentificadorExtranjero').text = " "
-    else : 
-       ET.SubElement(comprador, 'IdentificadorExtranjero').text = rfce_data.IdentificadorExtranjero
-
-    ET.SubElement(comprador, 'RazonSocialComprador').text = rfce_data.RazonSocialComprador or ""
-
-    # 3. Totales (must be direct child of ECF)
-    totales_root = ET.SubElement(encabezado, 'Totales')
-    ET.SubElement(totales_root, 'MontoGravadoTotal').text = "%.2f" %  float(rfce_data.MontoGravadoTotal)
-    ET.SubElement(totales_root, 'MontoGravadoI1').text = "%.2f" %  float(rfce_data.MontoGravadoI1)
-
-    if rfce_data.MontoGravadoI2 == "#e" : 
-       ET.SubElement(totales_root, 'MontoGravadoI2').text = "%.2f" %  float(0)
-    else :
-       ET.SubElement(totales_root, 'MontoGravadoI2').text = "%.2f" %  float(rfce_data.MontoGravadoI2)  
-        
-    if rfce_data.MontoGravadoI3 == "#e" : 
-       ET.SubElement(totales_root, 'MontoGravadoI3').text = "%.2f" %  float(0)
-    else :
-       ET.SubElement(totales_root, 'MontoGravadoI3').text = "%.2f" %  float(rfce_data.MontoGravadoI3)  
-
-    if rfce_data.MontoExento == "#e" : 
-       ET.SubElement(totales_root, 'MontoExento').text = "%.2f" %  float(0)
-    else :
-       ET.SubElement(totales_root, 'MontoExento').text = "%.2f" %  float(rfce_data.MontoExento)   
-        
-    if rfce_data.TotalITBIS == "#e" : 
-        ET.SubElement(totales_root, 'TotalITBIS').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'TotalITBIS').text = "%.2f" %  float(rfce_data.TotalITBIS)
-
-    if rfce_data.TotalITBIS1 == "#e" : 
-        ET.SubElement(totales_root, 'TotalITBIS1').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'TotalITBIS1').text = "%.2f" %  float(rfce_data.TotalITBIS1)
-
-    if rfce_data.TotalITBIS2 == "#e" : 
-        ET.SubElement(totales_root, 'TotalITBIS2').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'TotalITBIS2').text = "%.2f" %  float(rfce_data.TotalITBIS2)
-
-    if rfce_data.TotalITBIS3 == "#e" : 
-        ET.SubElement(totales_root, 'TotalITBIS3').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'TotalITBIS3').text = "%.2f" %  float(rfce_data.TotalITBIS3)
-    
-    # if rfce_data.MontoImpuestoAdicional == "#e" : 
-    #     ET.SubElement(totales_root, 'MontoImpuestoAdicional').text = "%.2f" %  float(0)
-    # else:
-    #     ET.SubElement(totales_root, 'MontoImpuestoAdicional').text = "%.2f" %  float(rfce_data.MontoImpuestoAdicional)
-
-    # ImpuestosAdicionales = ET.SubElement(totales_root, 'ImpuestosAdicionales')
-
-    # count_ImpuestoAdicional = len(rfce_data.TipoImpuesto)
-
-    # for i in range(count_ImpuestoAdicional) : 
-    #     ImpuestoAdicional = ET.SubElement(ImpuestosAdicionales, 'ImpuestoAdicional')
-            
-    #     if rfce_data.TipoImpuesto[i] == "#e" : 
-    #         ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = " "
-    #     else:
-    #         ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = rfce_data.TipoImpuesto[i]
-
-    #     if rfce_data.MontoImpuestoSelectivoConsumoEspecifico[i] == "#e" : 
-    #         ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoEspecifico').text = "%.2f" %  float(0)
-    #     else:
-    #         ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoEspecifico').text = "%.2f" %  float(rfce_data.MontoImpuestoSelectivoConsumoEspecifico[i])
-            
-    #     if rfce_data.MontoImpuestoSelectivoConsumoAdvalorem[i] == "#e" : 
-    #         ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoAdvalorem').text = "%.2f" %  float(0)
-    #     else:
-    #         ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoAdvalorem').text = "%.2f" %  float(rfce_data.MontoImpuestoSelectivoConsumoAdvalorem[i])
-             
-    #     if rfce_data.OtrosImpuestosAdicionales[i] == "#e" : 
-    #         ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = "%.2f" %  float(0)
-    #     else:
-    #         ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = "%.2f" %  float(rfce_data.OtrosImpuestosAdicionales[i])
-
-    if rfce_data.MontoTotal == "#e" : 
-        ET.SubElement(totales_root, 'MontoTotal').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'MontoTotal').text = "%.2f" %  float(rfce_data.MontoTotal)
-                
-    if rfce_data.MontoNoFacturable == "#e" : 
-        ET.SubElement(totales_root, 'MontoNoFacturable').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'MontoNoFacturable').text = "%.2f" %  float(rfce_data.MontoNoFacturable)
-
-    # MontoPeriodo                    
-    if rfce_data.MontoPeriodo == "#e" : 
-        ET.SubElement(totales_root, 'MontoPeriodo').text = "%.2f" %  float(0)
-    else:
-        ET.SubElement(totales_root, 'MontoPeriodo').text = "%.2f" %  float(rfce_data.MontoPeriodo)
-
-    value = "0234"
-    value = value[:6].ljust(6, "0")
-    print(f"Value : {value}")
-
-    #CodigoSeguridadeCF    
-    if rfce_data.CodigoSeguridadeCF == "#e" : 
-        ET.SubElement(encabezado, 'CodigoSeguridadeCF').text = "000000"
-    else:      
-        value = rfce_data.CodigoSeguridadeCF
-        value = value[:6].ljust(6, "0")
-        ET.SubElement(encabezado, 'CodigoSeguridadeCF').text = value
-
-
-    # Convert to XML string
-    xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-    
-    rough_string = ET.tostring(root, 'utf-8')
-    reparsed = minidom.parseString(rough_string)
-    pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
-
-    path = os.path.join(os.path.dirname(__file__), 'data/row_invoice.xml')
-    
-    with open(path, 'wb') as f:
-        f.write(pretty_xml_as_str)
-
-    __logger.info("Finished the creating RFCE xml")
-
-    # Convert to lxml for signing
-    return xml_str
+param = Param()
+invoice_name = ""
 
 def generate_dummy_dgii_xml():
     """Generate fully compliant DGII dummy XML for immediate client demo"""
@@ -593,6 +150,8 @@ __trackId : str
 __token : str
 
 def read_excel_create_efc_xml(in_row : int) :
+    global invoice_name
+    global param
 
     """Generate DGII-compliant XML from an Odoo invoice."""
     # Create root element with namespaces
@@ -641,6 +200,7 @@ def read_excel_create_efc_xml(in_row : int) :
                 value = "" 
             ET.SubElement(id_doc, 'eNCF').text = value
             __logger.info(f'eNCF : {cell_value}')
+            param.ENCF = value
             break
 
     # Write FechaVencimientoSecuencia
@@ -866,6 +426,7 @@ def read_excel_create_efc_xml(in_row : int) :
                 value = "" 
 
             ET.SubElement(Emisor, 'RNCEmisor').text = value
+            param.RNCEmisor = value
             __logger.info(f'RNCEmisor : {value}')
             break
 
@@ -23670,8 +23231,9 @@ def create_e_cf_47(in_row : int) :
     return xml_str
 
 def main():
+
     try:
-        dgii_service = DGIICFService(dgii_env='test', company_id=1)
+        dgii_service = DGIICFService(dgii_env='prod', company_id=1)
 
         # Step 1: Get the seed
         semilla = dgii_service.get_semilla()
@@ -23702,7 +23264,6 @@ def main():
 
         # Step 4: Generate and sign e-CF XML     
         # xml_str = generate_dummy_dgii_xml()   
-        # xml_str = read_excel_create_rfce_xml(4)
         # xml_str = create_e_cf_31(7) # 7, 8, 9, 10
         # xml_str = create_e_cf_32(15) # 11, 12, 13, 14, 15, 3
         # xml_str = create_e_cf_33(2) # 2
@@ -23715,32 +23276,50 @@ def main():
         # xml_str = create_e_cf_47(26) # 25, 26
         # __logger.info(f"invoice xml: {xml_str}")
 
-        signed_xml = dgii_service.sign_xml(xml_str)
+
+        #################################
+        ###########   RFCE   ############ 
+        #################################
+
+        rfce_client = RFCEClient()
+        xml_str = rfce_client.create_rfce_xml(5)
+
+        invoice_name = rfce_client.invoice_name
+        __logger.info(f"Invoice Name: {invoice_name}")
+
+        signed_xml = dgii_service.sign_xml(xml_str, invoice_name)
         # __logger.info(f"signed invoice xml: {signed_xml}")
 
         # Step 5: Submit the signed e-CF XML to DGII using the token
-        # response = dgii_service.submit_rcef(token)
-        response = dgii_service.submit_ecf(token)
+        response = dgii_service.submit_rfce(token)
+        # response = dgii_service.submit_ecf(token)
         trackId = ""
         response_data = json.loads(response.content.decode('utf-8'))
 
         __logger.info(f"Submitting Response:  {response_data}")
 
         # Log the response and update the invoice status
-        if response.status_code == 200:
-            response_data = json.loads(response.content.decode('utf-8'))
-            __logger.info(f"Submitted to DGII, response: trackId:  {response_data['trackId']}")
-            trackId = response_data['trackId']
-        else:
-            __logger.error(f"Error submitting invoice to DGII: {response.text}")
-            return
+        # if response.status_code == 200:
+        #     response_data = json.loads(response.content.decode('utf-8'))
+        #     __logger.info(f"Submitted to DGII, response: trackId:  {response_data['trackId']}")
+        #     trackId = response_data['trackId']
+        # else:
+        #     __logger.error(f"Error submitting invoice to DGII: {response.text}")
+        #     return
 
-        # Step 6: Track the status of e-CF to DGII using the token
-        response = dgii_service.track_ecf(trackId, token)
-        __logger.info(f"track result: {response.content}")
+        # param.RNCEmisor = "132641566"
+        # param.CodigoSeguridadeCF = "000000"
+        # param.ENCF = "E320000000001"
 
-        response_data = json.loads(response.content.decode('utf-8'))
-        __logger.info(f"dgii_track_id {trackId}, dgii_token : {token}")
+        # __logger.info(f"RFCE Param: {param}")
+
+        # # Step 6: Track the status of e-CF to DGII using the token
+        # # response = dgii_service.track_ecf(trackId, token)
+        # response = dgii_service.track_rfce(token, param)
+        # __logger.info(f"track result: {response.content}")
+
+        # response_data = json.loads(response.content.decode('utf-8'))
+        # __logger.info(f"dgii_track_id {trackId}, dgii_token : {token}")
 
     except Exception as e:
         __logger.error(f"Error processing invoice: {str(e)}")
