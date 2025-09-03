@@ -3,6 +3,7 @@ import logging
 import os
 import json
 from lxml import etree
+from logger import __logger
 
 class DGIICFService:
     def __init__(self, dgii_env='test', company_id=None, env=None):
@@ -156,7 +157,7 @@ class DGIICFService:
 
         self._logger.info(f"Submitting the signed e-CF XML to DGII.")
 
-        xml_file_path = os.path.join(os.path.dirname(__file__), 'data/signed_invoice.xml')
+        xml_file_path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}_signed.xml')
 
         with open(xml_file_path, 'rb') as f:
             files = {'xml': ('signed.xml', f, 'text/xml')}
