@@ -2464,7 +2464,6 @@ class ECF31:
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
 
         self.invoice_name = f'{self.RNCEmsior}{self.ENCF}'
-
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
