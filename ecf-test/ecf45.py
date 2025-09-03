@@ -2407,7 +2407,8 @@ class ECF45:
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
 
-        path = os.path.join(os.path.dirname(__file__), 'data/row_invoice.xml')
+        self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
+        path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
             f.write(pretty_xml_as_str)
