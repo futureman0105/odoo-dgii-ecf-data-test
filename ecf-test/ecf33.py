@@ -7,15 +7,16 @@ from xml.dom import minidom
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
 
-class ECF32:
+class ECF33:
     """Class to handle E-CF-31 XML generation."""
     def __init__(self):
-        self.RNCEmsior = ""
+        self.RNCEmisor = ""
         self.ENCF = ""
         self.RNCComprador = ""
         self.invoice_name = ""
     
-    def create_e_cf_32(self, in_row : int) :
+    def create_e_cf_33(self, in_row : int) :
+
         """Generate DGII-compliant XML from an Odoo invoice."""
         # Create root element with namespaces
         root = ET.Element('ECF', {
@@ -274,7 +275,7 @@ class ECF32:
                     value = "" 
 
                 ET.SubElement(Emisor, 'RNCEmisor').text = value
-                self.RNCEmsior = value
+                self.RNCEmisor = value
                 print(f'RNCEmisor : {value}')
                 break
 
@@ -523,8 +524,8 @@ class ECF32:
                 self.RNCComprador = value
                 print(f'RNCComprador : {value}')
                 break
-
-        # Write IdentificadorExtranjero
+            
+        # Write RNCComprador
         search_text = "IdentificadorExtranjero" 
         for col in range(1, sheet.max_column + 1):
             cell_value = sheet.cell(1, column=col).value
@@ -760,18 +761,18 @@ class ECF32:
                 print(f'NumeroEmbarque : {value}')
                 break
 
-        # # Write NumeroContenedor
-        # search_text = "NumeroContenedor" 
-        # for col in range(1, sheet.max_column + 1):
-        #     cell_value = sheet.cell(1, column=col).value
-        #     if cell_value == search_text:
-        #         value = str(sheet.cell(in_row, column=col).value)
-        #         if value == "#e" :
-        #             value = "" 
+        # Write NumeroContenedor
+        search_text = "NumeroContenedor" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value == "#e" :
+                    value = "" 
 
-        #         ET.SubElement(InformacionesAdicionales, 'NumeroContenedor').text = value
-        #         print(f'NumeroContenedor : {value}')
-        #         break
+                ET.SubElement(InformacionesAdicionales, 'NumeroContenedor').text = value
+                print(f'NumeroContenedor : {value}')
+                break
 
         value = str(sheet.cell(in_row, column=73).value)
         if value == "#e" :
@@ -1293,6 +1294,58 @@ class ECF32:
 
                 ET.SubElement(Totales, 'ValorPagar').text = value
                 print(f'ValorPagar : {value}')
+                break
+
+        # Write TotalITBISRetenido
+        search_text = "TotalITBISRetenido" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value == "#e" :
+                    value = "" 
+
+                ET.SubElement(Totales, 'TotalITBISRetenido').text = value
+                print(f'TotalITBISRetenido : {value}')
+                break
+
+        # Write TotalISRRetencion
+        search_text = "TotalISRRetencion" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value == "#e" :
+                    value = "" 
+
+                ET.SubElement(Totales, 'TotalISRRetencion').text = value
+                print(f'TotalISRRetencion : {value}')
+                break
+
+        # Write TotalITBISPercepcion
+        search_text = "TotalITBISPercepcion" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value == "#e" :
+                    value = "" 
+
+                ET.SubElement(Totales, 'TotalITBISPercepcion').text = value
+                print(f'TotalITBISPercepcion : {value}')
+                break
+
+        # Write TotalISRPercepcion
+        search_text = "TotalISRPercepcion" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value == "#e" :
+                    value = "" 
+
+                ET.SubElement(Totales, 'TotalISRPercepcion').text = value
+                print(f'TotalISRPercepcion : {value}')
                 break
 
         OtraMoneda = ET.SubElement(encabezado, 'OtraMoneda')
@@ -2225,7 +2278,7 @@ class ECF32:
         Pagina_count = 2
 
         search_text = "PaginaNo[1]" 
-        col_index : int
+        col_index = 0
         for col in range(1, sheet.max_column + 1):
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
@@ -2244,7 +2297,7 @@ class ECF32:
                     if value == "#e" :
                         value = ""             
                     ET.SubElement(Pagina, 'PaginaNo').text = value
-                    print(f'PaginaNo : {cell_value}')
+                    print(f'PaginaNo : {value}')
                     print(f'PaginaNo col_index : {col_index}')
                     col_index += 1
 
@@ -2377,7 +2430,7 @@ class ECF32:
                     ET.SubElement(Pagina, 'SubtotalMontoNoFacturablePagina').text =value
                     print(f'SubtotalMontoNoFacturablePagina : {value}')
                     print(f'SubtotalMontoNoFacturablePagina _ index : {col_index}')
-                    # col_index += 1
+                    col_index += 1
 
         InformacionReferencia = ET.SubElement(root, 'InformacionReferencia')
         
@@ -2413,13 +2466,20 @@ class ECF32:
         ET.SubElement(InformacionReferencia, 'CodigoModificacion').text =value
         print(f'CodigoModificacion : {value}')
         col_index += 1
+            
+        # RazonModificacion
+        value = str(sheet.cell(in_row, column=col_index).value)
+        if value == "#e" :
+            value = ""     
+        ET.SubElement(InformacionReferencia, 'RazonModificacion').text =value
+        print(f'RazonModificacion : {value}')
+        col_index += 1
 
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
-
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
 
-        self.invoice_name = f'{self.RNCEmsior}{self.ENCF}'
+        self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
