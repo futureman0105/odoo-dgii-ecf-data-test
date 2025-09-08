@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import logging
 import os
 from xml.dom import minidom
+from utility import clean_xml_safe 
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
@@ -33,7 +34,7 @@ class ECF34:
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
                 if value != "#e" :    
-                    ET.SubElement(encabezado, 'Version').text = '1.1'
+                    ET.SubElement(encabezado, 'Version').text = value
                     print(f'Version : {value}')
                     print(f'Version Col Index : {col}')
                 break
@@ -1137,6 +1138,8 @@ class ECF34:
                         value = "" 
                     ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = value
                     print(f'OtrosImpuestosAdicionales : {value}')
+                    col_index +=1
+
 
         # Write MontoTotal
         search_text = "MontoTotal" 
@@ -1485,6 +1488,8 @@ class ECF34:
 
                     ET.SubElement(ImpuestoAdicionalOtraMoneda, 'OtrosImpuestosAdicionalesOtraMoneda').text = value
                     print(f'OtrosImpuestosAdicionalesOtraMoneda : {value}')
+                    col_index +=1
+
 
         # Write MontoTotalOtraMoneda
         search_text = "MontoTotalOtraMoneda" 
@@ -2355,55 +2360,75 @@ class ECF34:
         InformacionReferencia = ET.SubElement(root, 'InformacionReferencia')
         
         # NCFModificado
-        col_index += 1
-        value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'NCFModificado').text =value
-        print(f'NCFModificado : {value}')
-        col_index += 1
+        search_text = "NCFModificado" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value != "#e" :
+                    ET.SubElement(InformacionReferencia, 'NCFModificado').text = value
+                    print(f'NCFModificado : {cell_value}')
+                break
             
         # RNCOtroContribuyente
-        value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'RNCOtroContribuyente').text =value
-        print(f'RNCOtroContribuyente : {value}')
-        col_index += 1
-            
+        search_text = "RNCOtroContribuyente" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value != "#e" :
+                    ET.SubElement(InformacionReferencia, 'RNCOtroContribuyente').text = value
+                    print(f'RNCOtroContribuyente : {cell_value}')
+                break
+      
         # FechaNCFModificado
-        value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'FechaNCFModificado').text =value
-        print(f'FechaNCFModificado : {value}')
-        col_index += 1
+        search_text = "FechaNCFModificado" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value != "#e" :
+                    ET.SubElement(InformacionReferencia, 'FechaNCFModificado').text = value
+                    print(f'FechaNCFModificado : {cell_value}')
+                break
             
         # CodigoModificacion
-        value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'CodigoModificacion').text =value
-        print(f'CodigoModificacion : {value}')
-        col_index += 1
+        search_text = "CodigoModificacion" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value != "#e" :
+                    ET.SubElement(InformacionReferencia, 'CodigoModificacion').text = value
+                    print(f'CodigoModificacion : {cell_value}')
+                break
             
         # RazonModificacion
-        value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'RazonModificacion').text =value
-        print(f'RazonModificacion : {value}')
-        col_index += 1
+        search_text = "RazonModificacion" 
+        for col in range(1, sheet.max_column + 1):
+            cell_value = sheet.cell(1, column=col).value
+            if cell_value == search_text:
+                value = str(sheet.cell(in_row, column=col).value)
+                if value != "#e" :
+                    ET.SubElement(InformacionReferencia, 'RazonModificacion').text = value
+                    print(f'RazonModificacion : {cell_value}')
+                break
 
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
+       
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
+        pretty_xml_str = pretty_xml_as_str.decode('utf-8') if isinstance(pretty_xml_as_str, bytes) else pretty_xml_as_str
+
+        cleaned_xml = clean_xml_safe(pretty_xml_as_str)
+        print(cleaned_xml)
 
         self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
-            f.write(pretty_xml_as_str)
+            f.write(cleaned_xml.encode('utf-8'))
         
         xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return xml_str
+        return cleaned_xml

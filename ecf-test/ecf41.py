@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import logging
 import os
 from xml.dom import minidom
+from utility import clean_xml_safe 
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
@@ -14,7 +15,7 @@ class ECF41:
         self.ENCF = ""
         self.RNCComprador = ""
         self.invoice_name = ""
-  
+
     def create_e_cf_41(self, in_row : int) :
 
         """Generate DGII-compliant XML from an Odoo invoice."""
@@ -33,7 +34,7 @@ class ECF41:
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
                 if value != "#e" :    
-                    ET.SubElement(encabezado, 'Version').text = '1.1'
+                    ET.SubElement(encabezado, 'Version').text = value
                     print(f'Version : {value}')
                     print(f'Version Col Index : {col}')
                 break
@@ -111,11 +112,9 @@ class ECF41:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'FechaLimitePago').text = value
-                print(f'FechaLimitePago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'FechaLimitePago').text = value
+                    print(f'FechaLimitePago : {value}')
                 break
 
         # Write TerminoPago
@@ -1353,8 +1352,8 @@ class ECF41:
                         if value == "#e" :
                             value = "" 
 
-                        ET.SubElement(SubRecargo, 'MontosubRecargo').text = value
-                        print(f'MontosubRecargo : {value}')
+                        ET.SubElement(SubRecargo, 'MontoSubRecargo').text = value
+                        print(f'MontoSubRecargo : {value}')
                         col_index += 1
 
                     # TablaImpuestoAdicional = ET.SubElement(Item, 'TablaImpuestoAdicional')
@@ -1885,15 +1884,22 @@ class ECF41:
         print(f'CodigoModificacion : {value}')
         col_index += 1
 
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
+       
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
+        pretty_xml_str = pretty_xml_as_str.decode('utf-8') if isinstance(pretty_xml_as_str, bytes) else pretty_xml_as_str
+
+        cleaned_xml = clean_xml_safe(pretty_xml_as_str)
+        print(cleaned_xml)
 
         self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
-            f.write(pretty_xml_as_str)
+            f.write(cleaned_xml.encode('utf-8'))
         
         xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return xml_str
+        return cleaned_xml
+

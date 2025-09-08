@@ -6,22 +6,24 @@ import openpyxl
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 import requests
+import time
 
 from logger import __logger
 from dgii_client import DGIICFService
-from rfce import RFCEClient
-from ecf31 import ECF31
-from ecf32 import ECF32
-from ecf33 import ECF33
-from ecf34 import ECF34
-from ecf41 import ECF41
-from ecf43 import ECF43
-from ecf44 import ECF44
-from ecf45 import ECF45
-from ecf47 import ECF47
+# from rfce import RFCEClient
+# from ecf31 import ECF31
+# from ecf32 import ECF32
+# from ecf33 import ECF33
+# from ecf34 import ECF34
+# from ecf41 import ECF41
+# from ecf43 import ECF43
+# from ecf44 import ECF44
+# from ecf45 import ECF45
+# from ecf46 import ECF46
+# from ecf47 import ECF47
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
-sheet = workbook["ECF"]
+sheet = workbook["RFCE"]
 
 @dataclass
 class Param:
@@ -183,50 +185,97 @@ def main():
         __logger.info(f"Received token: {token}")
 
         """ filetest for debuging"""
-        # xml_file_path = os.path.join(os.path.dirname(__file__), 'data/row_invoice.xml')
-
-        # with open(xml_file_path, 'r', encoding='utf-8') as file:
-        #     xml_str = file.read()
-        # Print or use the XML string
-        # print(xml_str)
 
         # Step 4: Generate and sign e-CF XML     
         # xml_str = generate_dummy_dgii_xml()  
         # __logger.info(f"invoice xml: {xml_str}")
-
-        #################################
-        ###########   RFCE   ############ 
-        #################################
-
-        # rfce_client = RFCEClient()
-        # xml_str = rfce_client.create_rfce_xml(5)
-
-        # invoice_name = rfce_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
         
-        ##############################################
-        ###########        E-CF-31        ############
-        ###########   row : 7, 8, 9, 10   ############
-        ##############################################
+        ###############################################
+        ############        E-CF-31        ############
+        ############   row : 7, 8, 9, 10   ############
+        ###############################################
         # e_cf_31_client = ECF31()
-        # xml_str = e_cf_31_client.create_e_cf_31(7)
+        # xml_str = e_cf_31_client.create_e_cf_31(10)
 
         # invoice_name = e_cf_31_client.invoice_name
         # __logger.info(f"Invoice Name: {invoice_name}")
 
         
         ##############################################
-        ######        E-CF-32                  #######
-        ######   row : 11, 12, 13, 14, 15, 3   #######
+        ####              E-CF-32                 ####
+        ####  row : 3, 15 (> RD$250,000)          ####
+        ####  row : 11, 12, 13, 14(< RD$250,000)  ####
         ##############################################
         # e_cf_32_client = ECF32()
-        # xml_str = e_cf_32_client.create_e_cf_32(3)
+        # xml_str = e_cf_32_client.create_e_cf_32(14)
 
         # invoice_name = e_cf_32_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
+        # __logger.info(f"Invoice Name: {invoice_name}")                        
 
         
+        ##############################################
+        ######           E-CF-41               #######
+        ######           row : 6, 16           #######
+        ##############################################
+        # e_cf_41_client = ECF41()
+        # xml_str = e_cf_41_client.create_e_cf_41(6)
+
+        # invoice_name = e_cf_41_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+        
+
+        ##############################################
+        ######           E-CF-43               #######
+        ######           row : 17, 18          #######
+        ##############################################
+        # e_cf_43_client = ECF43()
+        # xml_str = e_cf_43_client.create_e_cf_43(17)
+
+        # invoice_name = e_cf_43_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+        ##############################################
+        ######           E-CF-44               #######
+        ######           row : 19, 20          #######
+        ##############################################
+        # e_cf_44_client = ECF44()
+        # xml_str = e_cf_44_client.create_e_cf_44(20)
+
+        # invoice_name = e_cf_44_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+
+        ##############################################
+        ######           E-CF-45               #######
+        ######           row : 21, 22          #######
+        ##############################################
+        # e_cf_45_client = ECF45()
+        # xml_str = e_cf_45_client.create_e_cf_45(22)
+
+        # invoice_name = e_cf_45_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+        ##############################################
+        ######           E-CF-46               #######
+        ######           row : 23, 24          #######
+        ##############################################
+        # e_cf_46_client = ECF46()
+        # xml_str = e_cf_46_client.create_e_cf_46(24)
+
+        # invoice_name = e_cf_46_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+        ##############################################
+        ######           E-CF-47               #######
+        ######           row : 25, 26          #######
+        ##############################################
+        # e_cf_47_client = ECF47()
+        # xml_str = e_cf_47_client.create_e_cf_47(26)
+
+        # invoice_name = e_cf_47_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+
         ##############################################
         ######           E-CF-33               #######
         ######           row : 2               #######
@@ -243,87 +292,42 @@ def main():
         ######           row : 4, 5            #######
         ##############################################
         # e_cf_34_client = ECF34()
-        # xml_str = e_cf_34_client.create_e_cf_34(4)
+        # xml_str = e_cf_34_client.create_e_cf_34(5)
 
         # invoice_name = e_cf_34_client.invoice_name
         # __logger.info(f"Invoice Name: {invoice_name}")
-        
+
+
+        #############################################
+        ###########   RFCE               ############
+        ###########   ROW : 2, 3, 4, 5   ############ 
+        #############################################
+
+        # rfce_client = RFCEClient()
+        # xml_str = rfce_client.create_rfce_xml(5)
+
+        # invoice_name = rfce_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+        # response = dgii_service.submit_rfce(token)
+
                 
-        ##############################################
-        ######           E-CF-41               #######
-        ######           row : 6, 16           #######
-        ##############################################
-        # e_cf_41_client = ECF41()
-        # xml_str = e_cf_41_client.create_e_cf_41(6)
+        xml_file_path = os.path.join(os.path.dirname(__file__), 'data/132641566E340000000016.xml')
 
-        # invoice_name = e_cf_41_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
-        ##############################################
-        ######           E-CF-43               #######
-        ######           row : 17, 18          #######
-        ##############################################
-        # e_cf_43_client = ECF43()
-        # xml_str = e_cf_43_client.create_e_cf_43(17)
-
-        # invoice_name = e_cf_43_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
-
-        ##############################################
-        ######           E-CF-44               #######
-        ######           row : 19, 20          #######
-        ##############################################
-        # e_cf_44_client = ECF44()
-        # xml_str = e_cf_44_client.create_e_cf_44(19)
-
-        # invoice_name = e_cf_44_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
-
-        ##############################################
-        ######           E-CF-45               #######
-        ######           row : 21, 22          #######
-        ##############################################
-        # e_cf_45_client = ECF45()
-        # xml_str = e_cf_45_client.create_e_cf_45(19)
-
-        # invoice_name = e_cf_45_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
-
-        ##############################################
-        ######           E-CF-46               #######
-        ######           row : 23, 24          #######
-        ##############################################
-        # e_cf_46_client = ECF46()
-        # xml_str = e_cf_46_client.create_e_cf_46(23)
-
-        # invoice_name = e_cf_46_client.invoice_name
-        # __logger.info(f"Invoice Name: {invoice_name}")
-
-
-        ##############################################
-        ######           E-CF-47               #######
-        ######           row : 25, 26          #######
-        ##############################################
-        e_cf_47_client = ECF47()
-        xml_str = e_cf_47_client.create_e_cf_47(25)
-
-        invoice_name = e_cf_47_client.invoice_name
-        __logger.info(f"Invoice Name: {invoice_name}")
-
-
+        with open(xml_file_path, 'r', encoding='utf-8') as file:
+            xml_str = file.read()
+        # Print or use the XML stringW
+        print(xml_str)
+        
+        invoice_name = "132641566E340000000016"
         signed_xml = dgii_service.sign_xml(xml_str, invoice_name)
-        # __logger.info(f"signed invoice xml: {signed_xml}")
-
-        # Step 5: Submit the signed e-CF XML to DGII using the token
         # response = dgii_service.submit_rfce(token)
         response = dgii_service.submit_ecf(token)
+
         trackId = ""
         response_data = json.loads(response.content.decode('utf-8'))
 
         __logger.info(f"Submitting Response:  {response_data}")
+        __logger.info(f"Received token: {token}")
 
         # Log the response and update the invoice status
         if response.status_code == 200:
@@ -334,16 +338,58 @@ def main():
             __logger.error(f"Error submitting invoice to DGII: {response.text}")
             return
 
-        # Step 6: Track the status of e-CF to DGII using the token
         response = dgii_service.track_ecf(trackId, token)
-        # response = dgii_service.track_rfce(token, param)
+        # response = dgii_service.track_rfce(token, param)s
         __logger.info(f"track result: {response.content}")
+        
+        # while True:
+        #     __logger.info(f"checking status for trackId: {trackId} ...")
+        #     # Step 6: Track the status of e-CF to DGII using the token
+        #     response = dgii_service.track_ecf(trackId, token)
+        #     # response = dgii_service.track_rfce(token, param)
+        #     __logger.info(f"track result: {response.content}")
 
-        response_data = json.loads(response.content.decode('utf-8'))
-        __logger.info(f"dgii_track_id {trackId}, dgii_token : {token}")
+        #     # response_data = json.loads(response.content.decode('utf-8'))
 
+        #     # estado = response_data.get('estado', '')
+        #     # __logger.info(f"Invoice {invoice_name} status: {estado}")
+        #     # if estado == 'ACEPTADO':
+        #     #     __logger.info(f"Invoice {invoice_name} accepted by DGII.")
+        #     #     break
+        #     # elif estado == 'RECHAZADO':
+        #     #     __logger.error(f"Invoice {invoice_name} rejected by DGII. Reason: {response_data.get('mensaje', 'No reason provided')}")
+        #     #     break
+
+        #     time.sleep(300)
     except Exception as e:
         __logger.error(f"Error processing invoice: {str(e)}")
 
+def track_ecf(trackId : str) :
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMDI3MDA0NTUwMzkiLCJqdGkiOiI0Yzc1ZWUzOS0wMTNlLTQwM2ItOWU3Mi04NTg1NWU5MmQ3NmYiLCJuYmYiOjE3NTY5NDEyMTIsImV4cCI6MTc1Njk0NDgxMiwiaXNzIjoiREdJSS5GRSIsImF1ZCI6IlVTVUFSSU9TLkRHSUkuRkUifQ.aAW3XkmzT4HL3nhCU4AiNb0JOVECi_fenyc-nM3cHNA"
+
+    dgii_service = DGIICFService(dgii_env='prod', company_id=1)
+
+    while True :
+        __logger.info(f"checking status for trackId: {trackId} ...")
+        response = dgii_service.track_ecf(trackId, token)
+        __logger.info(f"track result: {response.content}")
+
+        # response_data = json.loads(response.content.decode('utf-8'))
+
+        # estado = response_data.get('estado', '')
+        # __logger.info(f"Invoice {invoice_name} status: {estado}")
+        # if estado == 'ACEPTADO':
+        #     __logger.info(f"Invoice {invoice_name} accepted by DGII.")
+        #     break
+        # elif estado == 'RECHAZADO':
+        #     __logger.error(f"Invoice {invoice_name} rejected by DGII. Reason: {response_data.get('mensaje', 'No reason provided')}")
+        #     break
+
+        time.sleep(300)
+
 if __name__ == "__main__":
+
+    # track_id = "63d948f6-fb4a-462b-aabc-a285c8da78c9"
+
+    # track_ecf(track_id)
     main()

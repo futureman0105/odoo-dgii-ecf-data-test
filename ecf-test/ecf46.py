@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import logging
 import os
 from xml.dom import minidom
+from utility import clean_xml_safe 
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
@@ -34,7 +35,7 @@ class ECF46:
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
                 if value != "#e" :    
-                    ET.SubElement(encabezado, 'Version').text = '1.1'
+                    ET.SubElement(encabezado, 'Version').text = value
                     print(f'Version : {value}')
                     print(f'Version Col Index : {col}')
                 break
@@ -1278,13 +1279,13 @@ class ECF46:
                     print(f'IndicadorFacturacion : {value}')
                     col_index += 1
 
-                    # Retencion = ET.SubElement(Item, 'Retencion')
+                    Retencion = ET.SubElement(Item, 'Retencion')
                     # IndicadorAgenteRetencionoPercepcion
                     value = str(sheet.cell(in_row, column=col_index).value)
                     if value == "#e" :
                         value = "" 
 
-                    # ET.SubElement(Retencion, 'IndicadorAgenteRetencionoPercepcion').text = value
+                    ET.SubElement(Retencion, 'IndicadorAgenteRetencionoPercepcion').text = value
                     print(f'IndicadorAgenteRetencionoPercepcion : {value}')
                     col_index += 1
                     
@@ -1293,7 +1294,7 @@ class ECF46:
                     if value == "#e" :
                         value = "" 
 
-                    # ET.SubElement(Retencion, 'MontoITBISRetenido').text = value
+                    ET.SubElement(Retencion, 'MontoITBISRetenido').text = value
                     print(f'MontoITBISRetenido : {value}')
                     col_index += 1
 
@@ -1302,7 +1303,7 @@ class ECF46:
                     if value == "#e" :
                         value = "" 
 
-                    # ET.SubElement(Retencion, 'MontoISRRetenido').text = value
+                    ET.SubElement(Retencion, 'MontoISRRetenido').text = value
                     print(f'MontoISRRetenido : {value}')
                     col_index += 1
 
@@ -1351,8 +1352,63 @@ class ECF46:
                     print(f'UnidadMedida : {value}')
                     col_index += 1
 
-                    ET.SubElement(Item, 'FechaElaboracion').text = value
-                    print(f'FechaElaboracion : {value}')
+                    # CantidadReferencia
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'CantidadReferencia').text = value
+                        print(f'CantidadReferencia : {value}')
+                    col_index += 1
+
+                    # UnidadReferencia
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'UnidadReferencia').text = value
+                        print(f'UnidadReferencia : {value}')
+                    col_index += 1
+
+                    # TablaSubcantidad = ET.SubElement(Item, 'TablaSubcantidad')
+
+                    SubcantidadItem_count = 5
+                    while True : 
+                        SubcantidadItem_count -= 1
+                        if SubcantidadItem_count < 0 :
+                            break
+
+                        # SubcantidadItem = ET.SubElement(TablaSubcantidad, 'SubcantidadItem')
+                        
+                        # Subcantidad
+                        value = str(sheet.cell(in_row, column=col_index).value)
+                        if value != "#e" :
+                            # ET.SubElement(SubcantidadItem, 'Subcantidad').text = value
+                            print(f'Subcantidad : {value}')
+                        col_index += 1
+                        
+                        # CodigoSubcantidad
+                        value = str(sheet.cell(in_row, column=col_index).value)
+                        if value != "#e" :
+                            # ET.SubElement(SubcantidadItem, 'CodigoSubcantidad').text = value
+                            print(f'CodigoSubcantidad : {value}')
+                        col_index += 1
+
+                    # GradosAlcohol
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'GradosAlcohol').text = value
+                        print(f'GradosAlcohol : {value}')
+                    col_index += 1
+
+                    # PrecioUnitarioReferencia
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'PrecioUnitarioReferencia').text = value
+                        print(f'PrecioUnitarioReferencia : {value}')
+                    col_index += 1
+
+                    # FechaElaboracion
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'FechaElaboracion').text = value
+                        print(f'FechaElaboracion : {value}')
                     col_index += 1
 
                     # FechaVencimientoItem
@@ -1506,6 +1562,22 @@ class ECF46:
                         ET.SubElement(SubRecargo, 'MontosubRecargo').text = value
                         print(f'MontosubRecargo : {value}')
                         col_index += 1
+
+
+                    # TablaImpuestoAdicional = ET.SubElement(Item, 'TablaImpuestoAdicional')
+
+                    ImpuestoAdicional_count = 2
+                    while True :
+                        ImpuestoAdicional_count -= 1
+                        if ImpuestoAdicional_count < 0 : 
+                            break
+                        # ImpuestoAdicional =  ET.SubElement(TablaImpuestoAdicional, 'ImpuestoAdicional')                                   
+                        # MontosubRecargo
+                        value = str(sheet.cell(in_row, column=col_index).value)
+                        if value != "#e" :
+                            ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = value
+                            print(f'TipoImpuesto : {value}')
+                        col_index += 1               
     
                     OtraMonedaDetalle = ET.SubElement(Item, 'OtraMonedaDetalle')
 
@@ -1938,15 +2010,21 @@ class ECF46:
         print(f'CodigoModificacion : {value}')
         col_index += 1
 
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
+       
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
+        pretty_xml_str = pretty_xml_as_str.decode('utf-8') if isinstance(pretty_xml_as_str, bytes) else pretty_xml_as_str
+
+        cleaned_xml = clean_xml_safe(pretty_xml_as_str)
+        print(cleaned_xml)
 
         self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
-            f.write(pretty_xml_as_str)
+            f.write(cleaned_xml.encode('utf-8'))
         
         xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return xml_str
+        return cleaned_xml

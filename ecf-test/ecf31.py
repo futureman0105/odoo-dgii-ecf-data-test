@@ -33,11 +33,10 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(encabezado, 'Version').text = "1.1"
-                print(f'Version : {value}')
-                print(f'Version Col Index : {col}')
+                if value != "#e" :
+                    ET.SubElement(encabezado, 'Version').text = value
+                    print(f'Version : {value}')
+                    print(f'Version Col Index : {col}')
                 break
 
         # IdDoc
@@ -49,10 +48,10 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-                ET.SubElement(id_doc, 'TipoeCF').text = value
-                print(f'TipoeCF : {cell_value}')
+                if value != "#e" :
+                     
+                    ET.SubElement(id_doc, 'TipoeCF').text = value
+                    print(f'TipoeCF : {cell_value}')
                 break
 
         # Write eNCF
@@ -61,11 +60,10 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-                ET.SubElement(id_doc, 'eNCF').text = value
-                self.ENCF = value
-                print(f'eNCF : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'eNCF').text = value
+                    self.ENCF = value
+                    print(f'eNCF : {cell_value}')
                 break
 
         # Write FechaVencimientoSecuencia
@@ -74,11 +72,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'FechaVencimientoSecuencia').text = value
-                print(f'FechaVencimientoSecuencia : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'FechaVencimientoSecuencia').text = value
+                    print(f'FechaVencimientoSecuencia : {value}')
                 break
 
         # Write IndicadorEnvioDiferido
@@ -87,11 +83,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'IndicadorEnvioDiferido').text = value
-                print(f'IndicadorEnvioDiferido : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'IndicadorEnvioDiferido').text = value
+                    print(f'IndicadorEnvioDiferido : {value}')
                 break
 
         # Write IndicadorMontoGravado
@@ -100,11 +94,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'IndicadorMontoGravado').text = value
-                print(f'IndicadorMontoGravado : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'IndicadorMontoGravado').text = value
+                    print(f'IndicadorMontoGravado : {value}')
                 break
 
         # Write TipoIngresos
@@ -113,11 +105,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'TipoIngresos').text = value
-                print(f'TipoIngresos : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'TipoIngresos').text = value
+                    print(f'TipoIngresos : {value}')
                 break
 
         # Write TipoPago
@@ -126,11 +116,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'TipoPago').text = value
-                print(f'TipoPago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'TipoPago').text = value
+                    print(f'TipoPago : {value}')
                 break
 
         # Write FechaLimitePago
@@ -139,13 +127,10 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'FechaLimitePago').text = value
-                print(f'FechaLimitePago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'FechaLimitePago').text = value
+                    print(f'FechaLimitePago : {value}')
                 break
-
 
         # Write TerminoPago
         search_text = "TerminoPago" 
@@ -153,11 +138,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'TerminoPago').text = value
-                print(f'TerminoPago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'TerminoPago').text = value
+                    print(f'TerminoPago : {value}')
                 break
         
         
@@ -176,15 +159,13 @@ class ECF31:
                     FormaDePago = ET.SubElement(TablaFormasPago, 'FormaDePago')
 
                     value = str(sheet.cell(in_row, column= col_index ).value)
-                    if value == "#e" :
-                        value = ""
-                    ET.SubElement(FormaDePago, 'FormaPago').text = value
+                    if value != "#e" :
+                        ET.SubElement(FormaDePago, 'FormaPago').text = value
                     col_index += 1
 
                     value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = ""
-                    ET.SubElement(FormaDePago, 'MontoPago').text = value
+                    if value != "#e" :
+                        ET.SubElement(FormaDePago, 'MontoPago').text = value
                     col_index += 1
         
         # Write TipoCuentaPago
@@ -193,11 +174,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'TipoCuentaPago').text = value
-                print(f'TipoCuentaPago : {value}')
+                if value != "#e" :                    
+                    ET.SubElement(id_doc, 'TipoCuentaPago').text = value
+                    print(f'TipoCuentaPago : {value}')
                 break
             
         # Write NumeroCuentaPago
@@ -206,11 +185,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'NumeroCuentaPago').text = value
-                print(f'NumeroCuentaPago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'NumeroCuentaPago').text = value
+                    print(f'NumeroCuentaPago : {value}')
                 break
             
         # Write BancoPago
@@ -219,11 +196,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'BancoPago').text = value
-                print(f'BancoPago : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'BancoPago').text = value
+                    print(f'BancoPago : {value}')
                 break
 
         # Write FechaDesde
@@ -232,11 +207,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'FechaDesde').text = value
-                print(f'FechaDesde : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'FechaDesde').text = value
+                    print(f'FechaDesde : {value}')
                 break    
 
         # Write FechaHasta
@@ -245,11 +218,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'FechaHasta').text = value
-                print(f'FechaHasta : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'FechaHasta').text = value
+                    print(f'FechaHasta : {value}')
                 break    
 
         # Write TotalPaginas
@@ -258,11 +229,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(id_doc, 'TotalPaginas').text = value
-                print(f'TotalPaginas : {value}')
+                if value != "#e" :
+                    ET.SubElement(id_doc, 'TotalPaginas').text = value
+                    print(f'TotalPaginas : {value}')
                 break
 
         Emisor = ET.SubElement(encabezado, 'Emisor')
@@ -273,11 +242,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'RNCEmisor').text = value
-                self.RNCEmsior = value
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'RNCEmisor').text = value
+                    self.RNCEmsior = value
                 print(f'RNCEmisor : {value}')
                 break
 
@@ -287,11 +254,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'RazonSocialEmisor').text = value
-                print(f'RazonSocialEmisor : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'RazonSocialEmisor').text = value
+                    print(f'RazonSocialEmisor : {value}')
                 break
 
         # Write NombreComercial
@@ -300,11 +265,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'NombreComercial').text = value
-                print(f'NombreComercial : {value}')
+                if value != "#e" :                 
+                    ET.SubElement(Emisor, 'NombreComercial').text = value
+                    print(f'NombreComercial : {value}')
                 break
 
         # Write Sucursal
@@ -313,11 +276,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'Sucursal').text = value
-                print(f'Sucursal : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'Sucursal').text = value
+                    print(f'Sucursal : {value}')
                 break
 
         # Write DireccionEmisor
@@ -326,11 +287,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'DireccionEmisor').text = value
-                print(f'DireccionEmisor : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'DireccionEmisor').text = value
+                    print(f'DireccionEmisor : {value}')
                 break
 
         # Write Municipio
@@ -339,11 +298,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'Municipio').text = value
-                print(f'Municipio : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'Municipio').text = value
+                    print(f'Municipio : {value}')
                 break
 
         # Write Provincia
@@ -352,11 +309,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'Provincia').text = value
-                print(f'Provincia : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'Provincia').text = value
+                    print(f'Provincia : {value}')
                 break
 
         TablaTelefonoEmisor = ET.SubElement(Emisor, 'TablaTelefonoEmisor')
@@ -374,10 +329,9 @@ class ECF31:
                         break
 
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""
-                    ET.SubElement(TablaTelefonoEmisor, 'TelefonoEmisor').text = value           
-                    print(f'TelefonoEmisor : {value}')
+                    if value != "#e" :
+                        ET.SubElement(TablaTelefonoEmisor, 'TelefonoEmisor').text = value           
+                        print(f'TelefonoEmisor : {value}')
 
                     col_index +=1
                 
@@ -387,11 +341,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'CorreoEmisor').text = value
-                print(f'CorreoEmisor : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'CorreoEmisor').text = value
+                    print(f'CorreoEmisor : {value}')
                 break
 
         # Write WebSite
@@ -400,11 +352,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'WebSite').text = value
-                print(f'WebSite : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'WebSite').text = value
+                    print(f'WebSite : {value}')
                 break
 
         # Write ActividadEconomica
@@ -413,11 +363,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'ActividadEconomica').text = value
-                print(f'ActividadEconomica : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'ActividadEconomica').text = value
+                    print(f'ActividadEconomica : {value}')
                 break
 
         # Write CodigoVendedor
@@ -426,11 +374,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'CodigoVendedor').text = value
-                print(f'CodigoVendedor : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'CodigoVendedor').text = value
+                    print(f'CodigoVendedor : {value}')
                 break
 
         # Write NumeroFacturaInterna
@@ -439,11 +385,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'NumeroFacturaInterna').text = value
-                print(f'NumeroFacturaInterna : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'NumeroFacturaInterna').text = value
+                    print(f'NumeroFacturaInterna : {value}')
                 break
     
         # Write NumeroPedidoInterno
@@ -452,11 +396,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'NumeroPedidoInterno').text = value
-                print(f'NumeroPedidoInterno : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'NumeroPedidoInterno').text = value
+                    print(f'NumeroPedidoInterno : {value}')
                 break
     
         # Write ZonaVenta
@@ -465,11 +407,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'ZonaVenta').text = value
-                print(f'ZonaVenta : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'ZonaVenta').text = value
+                    print(f'ZonaVenta : {value}')
                 break
 
         # Write RutaVenta
@@ -478,11 +418,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'RutaVenta').text = value
-                print(f'RutaVenta : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'RutaVenta').text = value
+                    print(f'RutaVenta : {value}')
                 break
 
         # Write InformacionAdicionalEmisor
@@ -491,11 +429,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'InformacionAdicionalEmisor').text = value
-                print(f'InformacionAdicionalEmisor : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'InformacionAdicionalEmisor').text = value
+                    print(f'InformacionAdicionalEmisor : {value}')
                 break
 
         # Write FechaEmision
@@ -504,11 +440,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Emisor, 'FechaEmision').text = value
-                print(f'FechaEmision : {value}')
+                if value != "#e" :
+                    ET.SubElement(Emisor, 'FechaEmision').text = value
+                    print(f'FechaEmision : {value}')
                 break
 
         Comprador = ET.SubElement(encabezado, 'Comprador')
@@ -519,12 +453,10 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'RNCComprador').text = value
-                self.RNCComprador = value
-                print(f'RNCComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'RNCComprador').text = value
+                    self.RNCComprador = value
+                    print(f'RNCComprador : {value}')
                 break
 
         # Write RazonSocialComprador
@@ -533,11 +465,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'RazonSocialComprador').text = value
-                print(f'RazonSocialComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'RazonSocialComprador').text = value
+                    print(f'RazonSocialComprador : {value}')
                 break
     
         # Write ContactoComprador
@@ -546,11 +476,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'ContactoComprador').text = value
-                print(f'ContactoComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'ContactoComprador').text = value
+                    print(f'ContactoComprador : {value}')
                 break
 
         # Write CorreoComprador
@@ -559,11 +487,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'CorreoComprador').text = value
-                print(f'CorreoComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'CorreoComprador').text = value
+                    print(f'CorreoComprador : {value}')
                 break
 
         # Write DireccionComprador
@@ -572,11 +498,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'DireccionComprador').text = value
-                print(f'DireccionComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'DireccionComprador').text = value
+                    print(f'DireccionComprador : {value}')
                 break
 
         # Write MunicipioComprador
@@ -585,11 +509,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'MunicipioComprador').text = value
-                print(f'MunicipioComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'MunicipioComprador').text = value
+                    print(f'MunicipioComprador : {value}')
                 break
 
         # Write ProvinciaComprador
@@ -598,11 +520,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'ProvinciaComprador').text = value
-                print(f'ProvinciaComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'ProvinciaComprador').text = value
+                    print(f'ProvinciaComprador : {value}')
                 break
 
         # Write FechaEntrega
@@ -611,11 +531,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'FechaEntrega').text = value
-                print(f'FechaEntrega : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'FechaEntrega').text = value
+                    print(f'FechaEntrega : {value}')
                 break
 
         # Write ContactoEntrega
@@ -624,11 +542,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'ContactoEntrega').text = value
-                print(f'ContactoEntrega : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'ContactoEntrega').text = value
+                    print(f'ContactoEntrega : {value}')
                 break
 
         # Write DireccionEntrega
@@ -637,11 +553,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'DireccionEntrega').text = value
-                print(f'DireccionEntrega : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'DireccionEntrega').text = value
+                    print(f'DireccionEntrega : {value}')
                 break
 
         # Write TelefonoAdicional
@@ -650,11 +564,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'TelefonoAdicional').text = value
-                print(f'TelefonoAdicional : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'TelefonoAdicional').text = value
+                    print(f'TelefonoAdicional : {value}')
                 break
 
         # Write FechaOrdenCompra
@@ -663,11 +575,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'FechaOrdenCompra').text = value
-                print(f'FechaOrdenCompra : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'FechaOrdenCompra').text = value
+                    print(f'FechaOrdenCompra : {value}')
                 break
 
         # Write NumeroOrdenCompra
@@ -676,11 +586,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'NumeroOrdenCompra').text = value
-                print(f'NumeroOrdenCompra : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'NumeroOrdenCompra').text = value
+                    print(f'NumeroOrdenCompra : {value}')
                 break
 
         # Write CodigoInternoComprador
@@ -689,11 +597,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'CodigoInternoComprador').text = value
-                print(f'CodigoInternoComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'CodigoInternoComprador').text = value
+                    print(f'CodigoInternoComprador : {value}')
                 break
 
         # Write ResponsablePago
@@ -702,11 +608,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'ResponsablePago').text = value
-                print(f'ResponsablePago : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'ResponsablePago').text = value
+                    print(f'ResponsablePago : {value}')
                 break
         
         # Write InformacionAdicionalComprador
@@ -715,11 +619,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Comprador, 'InformacionAdicionalComprador').text = value
-                print(f'InformacionAdicionalComprador : {value}')
+                if value != "#e" :
+                    ET.SubElement(Comprador, 'InformacionAdicionalComprador').text = value
+                    print(f'InformacionAdicionalComprador : {value}')
                 break
         
         InformacionesAdicionales = ET.SubElement(encabezado, 'InformacionesAdicionales')
@@ -730,11 +632,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'FechaEmbarque').text = value
-                print(f'FechaEmbarque : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'FechaEmbarque').text = value
+                    print(f'FechaEmbarque : {value}')
                 break
 
         # Write NumeroEmbarque
@@ -743,32 +643,16 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'NumeroEmbarque').text = value
-                print(f'NumeroEmbarque : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'NumeroEmbarque').text = value
+                    print(f'NumeroEmbarque : {value}')
                 break
 
         # Write NumeroContenedor
-        search_text = "NumeroContene" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'NumeroContenedor').text = value
-                print(f'NumeroContenedor : {value}')
-                break
-
         value = str(sheet.cell(in_row, column=73).value)
-        if value == "#e" :
-            value = "" 
-
-        ET.SubElement(InformacionesAdicionales, 'NumeroContenedor').text = value
-        print(f'NumeroContenedor : {value}')
+        if value != "#e" :
+            ET.SubElement(InformacionesAdicionales, 'NumeroContenedor').text = value
+            print(f'NumeroContenedor : {value}')
         
         # Write NumeroReferencia
         search_text = "NumeroReferencia" 
@@ -776,11 +660,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'NumeroReferencia').text = value
-                print(f'NumeroReferencia : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'NumeroReferencia').text = value
+                    print(f'NumeroReferencia : {value}')
                 break
 
         # Write PesoBruto
@@ -789,11 +671,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'PesoBruto').text = value
-                print(f'PesoBruto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'PesoBruto').text = value
+                    print(f'PesoBruto : {value}')
                 break
 
         # Write PesoNeto
@@ -802,11 +682,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'PesoNeto').text = value
-                print(f'PesoNeto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'PesoNeto').text = value
+                    print(f'PesoNeto : {value}')
                 break
 
         # Write UnidadPesoBruto
@@ -815,11 +693,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'UnidadPesoBruto').text = value
-                print(f'UnidadPesoBruto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'UnidadPesoBruto').text = value
+                    print(f'UnidadPesoBruto : {value}')
                 break
 
         # Write UnidadPesoNeto
@@ -828,11 +704,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'UnidadPesoNeto').text = value
-                print(f'UnidadPesoNeto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'UnidadPesoNeto').text = value
+                    print(f'UnidadPesoNeto : {value}')
                 break
 
         # Write CantidadBulto
@@ -841,11 +715,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'CantidadBulto').text = value
-                print(f'CantidadBulto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'CantidadBulto').text = value
+                    print(f'CantidadBulto : {value}')
                 break
 
         # Write UnidadBulto
@@ -854,11 +726,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'UnidadBulto').text = value
-                print(f'UnidadBulto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'UnidadBulto').text = value
+                    print(f'UnidadBulto : {value}')
                 break
 
         # Write VolumenBulto
@@ -867,11 +737,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'VolumenBulto').text = value
-                print(f'VolumenBulto : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'VolumenBulto').text = value
+                    print(f'VolumenBulto : {value}')
                 break
 
         # Write UnidadVolumen
@@ -880,106 +748,90 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(InformacionesAdicionales, 'UnidadVolumen').text = value
-                print(f'UnidadVolumen : {value}')
+                if value != "#e" :
+                    ET.SubElement(InformacionesAdicionales, 'UnidadVolumen').text = value
+                    print(f'UnidadVolumen : {value}')
                 break
 
-        # Transporte
-        Transporte = ET.SubElement(encabezado, 'Transporte')
+        # # Transporte
+        # Transporte = ET.SubElement(encabezado, 'Transporte')
 
-        # Write Conductor
-        search_text = "Conductor" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write Conductor
+        # search_text = "Conductor" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'Conductor').text = value
+        #             print(f'Conductor : {value}')
+        #         break
 
-                ET.SubElement(Transporte, 'Conductor').text = value
-                print(f'Conductor : {value}')
-                break
+        # # Write DocumentoTransporte
+        # search_text = "DocumentoTransporte" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'DocumentoTransporte').text = value
+        #             print(f'DocumentoTransporte : {value}')
+        #         break
 
-        # Write DocumentoTransporte
-        search_text = "DocumentoTransporte" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write Ficha
+        # search_text = "Ficha" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'Ficha').text = value
+        #             print(f'Ficha : {value}')
+        #         break
 
-                ET.SubElement(Transporte, 'DocumentoTransporte').text = value
-                print(f'DocumentoTransporte : {value}')
-                break
+        # # Write Placa
+        # search_text = "Placa" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'Placa').text = value
+        #             print(f'Placa : {value}')
+        #         break
 
-        # Write Ficha
-        search_text = "Ficha" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write RutaTransporte
+        # search_text = "RutaTransporte" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'RutaTransporte').text = value
+        #             print(f'RutaTransporte : {value}')
+        #         break
 
-                ET.SubElement(Transporte, 'Ficha').text = value
-                print(f'Ficha : {value}')
-                break
+        # # Write ZonaTransporte
+        # search_text = "ZonaTransporte" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'ZonaTransporte').text = value
+        #             print(f'ZonaTransporte : {value}')
+        #         break
 
-        # Write Placa
-        search_text = "Placa" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Transporte, 'Placa').text = value
-                print(f'Placa : {value}')
-                break
-
-        # Write RutaTransporte
-        search_text = "RutaTransporte" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Transporte, 'RutaTransporte').text = value
-                print(f'RutaTransporte : {value}')
-                break
-
-        # Write ZonaTransporte
-        search_text = "ZonaTransporte" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Transporte, 'ZonaTransporte').text = value
-                print(f'ZonaTransporte : {value}')
-                break
-
-        # Write NumeroAlbaran
-        search_text = "NumeroAlbaran" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Transporte, 'NumeroAlbaran').text = value
-                print(f'NumeroAlbaran : {value}')
-                break
+        # # Write NumeroAlbaran
+        # search_text = "NumeroAlbaran" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+        #             ET.SubElement(Transporte, 'NumeroAlbaran').text = value
+        #             print(f'NumeroAlbaran : {value}')
+        #         break
 
         Totales = ET.SubElement(encabezado, 'Totales')
     
@@ -989,11 +841,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoGravadoTotal').text = value
-                print(f'MontoGravadoTotal : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoGravadoTotal').text = value
+                    print(f'MontoGravadoTotal : {value}')
                 break
 
         # Write MontoGravadoI1
@@ -1002,11 +852,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoGravadoI1').text = value
-                print(f'MontoGravadoI1 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoGravadoI1').text = value
+                    print(f'MontoGravadoI1 : {value}')
                 break
     
         # Write MontoGravadoI2
@@ -1015,11 +863,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoGravadoI2').text = value
-                print(f'MontoGravadoI2 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoGravadoI2').text = value
+                    print(f'MontoGravadoI2 : {value}')
                 break
     
         # Write MontoGravadoI3
@@ -1028,11 +874,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoGravadoI3').text = value
-                print(f'MontoGravadoI3 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoGravadoI3').text = value
+                    print(f'MontoGravadoI3 : {value}')
                 break
     
         # Write MontoExento
@@ -1041,11 +885,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoExento').text = value
-                print(f'MontoExento : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoExento').text = value
+                    print(f'MontoExento : {value}')
                 break
     
         # Write ITBIS1
@@ -1054,11 +896,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'ITBIS1').text = value
-                print(f'ITBIS1 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'ITBIS1').text = value
+                    print(f'ITBIS1 : {value}')
                 break
     
         # Write ITBIS2
@@ -1067,11 +907,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'ITBIS2').text = value
-                print(f'ITBIS2 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'ITBIS2').text = value
+                    print(f'ITBIS2 : {value}')
                 break
     
         # Write ITBIS3
@@ -1080,11 +918,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'ITBIS3').text = value
-                print(f'ITBIS3 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'ITBIS3').text = value
+                    print(f'ITBIS3 : {value}')
                 break
     
         # Write TotalITBIS
@@ -1093,11 +929,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBIS').text = value
-                print(f'TotalITBIS : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBIS').text = value
+                    print(f'TotalITBIS : {value}')
                 break
     
         # Write TotalITBIS1
@@ -1106,11 +940,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBIS1').text = value
-                print(f'TotalITBIS1 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBIS1').text = value
+                    print(f'TotalITBIS1 : {value}')
                 break
 
         # Write TotalITBIS2
@@ -1119,11 +951,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBIS2').text = value
-                print(f'TotalITBIS2 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBIS2').text = value
+                    print(f'TotalITBIS2 : {value}')
                 break
 
         # Write TotalITBIS3
@@ -1132,11 +962,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBIS3').text = value
-                print(f'TotalITBIS3 : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBIS3').text = value
+                    print(f'TotalITBIS3 : {value}')
                 break
 
         # Write MontoImpuestoAdicional
@@ -1145,67 +973,65 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoImpuestoAdicional').text = value
-                print(f'MontoImpuestoAdicional : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoImpuestoAdicional').text = value
+                    print(f'MontoImpuestoAdicional : {value}')
                 break
 
-        ImpuestosAdicionales = ET.SubElement(Totales, 'ImpuestosAdicionales')
-        search_text = "TipoImpuesto[1]" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
+        # ImpuestosAdicionales = ET.SubElement(Totales, 'ImpuestosAdicionales')
+        # search_text = "TipoImpuesto[1]" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
 
-                col_index = col
-                ImpuestoAdicional_count = 4
-                while True:
-                    ImpuestoAdicional_count -= 1
-                    if ImpuestoAdicional_count < 0:
-                        break
+        #         col_index = col
+        #         ImpuestoAdicional_count = 4
+        #         while True:
+        #             ImpuestoAdicional_count -= 1
+        #             if ImpuestoAdicional_count < 0:
+        #                 break
 
-                    ImpuestoAdicional = ET.SubElement(ImpuestosAdicionales, 'ImpuestoAdicional')
+        #             ImpuestoAdicional = ET.SubElement(ImpuestosAdicionales, 'ImpuestoAdicional')
 
-                    # TipoImpuesto
-                    value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = value
-                    print(f'TipoImpuesto : {value}')
-                    col_index +=1
+        #             # TipoImpuesto
+        #             value = str(sheet.cell(in_row, column=col_index).value)
+        #             if value != "#e" :
+                         
+        #             ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = value
+        #             print(f'TipoImpuesto : {value}')
+        #             col_index +=1
 
-                    # TasaImpuestoAdicional
-                    value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(ImpuestoAdicional, 'TasaImpuestoAdicional').text = value
-                    print(f'TasaImpuestoAdicional : {value}')
-                    col_index +=1
+        #             # TasaImpuestoAdicional
+        #             value = str(sheet.cell(in_row, column=col_index).value)
+        #             if value != "#e" :
+                         
+        #             ET.SubElement(ImpuestoAdicional, 'TasaImpuestoAdicional').text = value
+        #             print(f'TasaImpuestoAdicional : {value}')
+        #             col_index +=1
 
-                    # MontoImpuestoSelectivoConsumoEspecifico
-                    value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoEspecifico').text = value
-                    print(f'MontoImpuestoSelectivoConsumoEspecifico : {value}')
-                    col_index +=1
+        #             # MontoImpuestoSelectivoConsumoEspecifico
+        #             value = str(sheet.cell(in_row, column=col_index).value)
+        #             if value != "#e" :
+                         
+        #             ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoEspecifico').text = value
+        #             print(f'MontoImpuestoSelectivoConsumoEspecifico : {value}')
+        #             col_index +=1
 
-                    # MontoImpuestoSelectivoConsumoAdvalorem
-                    value = str(sheet.cell(in_row, column=col_index + 3).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoAdvalorem').text = value
-                    print(f'MontoImpuestoSelectivoConsumoAdvalorem : {value}')
-                    col_index +=1
+        #             # MontoImpuestoSelectivoConsumoAdvalorem
+        #             value = str(sheet.cell(in_row, column=col_index + 3).value)
+        #             if value != "#e" :
+                         
+        #             ET.SubElement(ImpuestoAdicional, 'MontoImpuestoSelectivoConsumoAdvalorem').text = value
+        #             print(f'MontoImpuestoSelectivoConsumoAdvalorem : {value}')
+        #             col_index +=1
 
 
-                    # OtrosImpuestosAdicionales
-                    value = str(sheet.cell(in_row, column=col_index + 4).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = value
-                    print(f'OtrosImpuestosAdicionales : {value}')
+        #             # OtrosImpuestosAdicionales
+        #             value = str(sheet.cell(in_row, column=col_index + 4).value)
+        #             if value != "#e" :
+                         
+        #             ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = value
+        #             print(f'OtrosImpuestosAdicionales : {value}')
 
         # Write MontoTotal
         search_text = "MontoTotal" 
@@ -1213,11 +1039,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoTotal').text = value
-                print(f'MontoTotal : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoTotal').text = value
+                    print(f'MontoTotal : {value}')
                 break
 
         # Write MontoNoFacturable
@@ -1226,11 +1050,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoNoFacturable').text = value
-                print(f'MontoNoFacturable : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoNoFacturable').text = value
+                    print(f'MontoNoFacturable : {value}')
                 break
 
         # Write MontoPeriodo
@@ -1239,11 +1061,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoPeriodo').text = value
-                print(f'MontoPeriodo : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoPeriodo').text = value
+                    print(f'MontoPeriodo : {value}')
                 break
 
         # Write SaldoAnterior
@@ -1252,11 +1072,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'SaldoAnterior').text = value
-                print(f'SaldoAnterior : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'SaldoAnterior').text = value
+                    print(f'SaldoAnterior : {value}')
                 break
 
         # Write MontoAvancePago
@@ -1265,11 +1083,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'MontoAvancePago').text = value
-                print(f'MontoAvancePago : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'MontoAvancePago').text = value
+                    print(f'MontoAvancePago : {value}')
                 break
 
         # Write ValorPagar
@@ -1278,11 +1094,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'ValorPagar').text = value
-                print(f'ValorPagar : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'ValorPagar').text = value
+                    print(f'ValorPagar : {value}')
                 break
 
         # Write TotalITBISRetenido
@@ -1291,11 +1105,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBISRetenido').text = value
-                print(f'TotalITBISRetenido : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBISRetenido').text = value
+                    print(f'TotalITBISRetenido : {value}')
                 break
 
         # Write TotalISRRetencion
@@ -1304,11 +1116,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalISRRetencion').text = value
-                print(f'TotalISRRetencion : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalISRRetencion').text = value
+                    print(f'TotalISRRetencion : {value}')
                 break
 
         # Write TotalITBISPercepcion
@@ -1317,11 +1127,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalITBISPercepcion').text = value
-                print(f'TotalITBISPercepcion : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalITBISPercepcion').text = value
+                    print(f'TotalITBISPercepcion : {value}')
                 break
 
         # Write TotalISRPercepcion
@@ -1330,243 +1138,241 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
-
-                ET.SubElement(Totales, 'TotalISRPercepcion').text = value
-                print(f'TotalISRPercepcion : {value}')
+                if value != "#e" :
+                    ET.SubElement(Totales, 'TotalISRPercepcion').text = value
+                    print(f'TotalISRPercepcion : {value}')
                 break
 
-        OtraMoneda = ET.SubElement(encabezado, 'OtraMoneda')
+        # OtraMoneda = ET.SubElement(encabezado, 'OtraMoneda')
     
-        # Write TipoMoneda
-        search_text = "TipoMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TipoMoneda
+        # search_text = "TipoMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TipoMoneda').text = value
-                print(f'TipoMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TipoMoneda').text = value
+        #         print(f'TipoMoneda : {value}')
+        #         break
     
-        # Write TipoCambio
-        search_text = "TipoCambio" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TipoCambio
+        # search_text = "TipoCambio" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TipoCambio').text = value
-                print(f'TipoCambio : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TipoCambio').text = value
+        #         print(f'TipoCambio : {value}')
+        #         break
     
-        # Write MontoGravadoTotalOtraMoneda
-        search_text = "MontoGravadoTotalOtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoGravadoTotalOtraMoneda
+        # search_text = "MontoGravadoTotalOtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoGravadoTotalOtraMoneda').text = value
-                print(f'MontoGravadoTotalOtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoGravadoTotalOtraMoneda').text = value
+        #         print(f'MontoGravadoTotalOtraMoneda : {value}')
+        #         break
     
-        # Write MontoGravado1OtraMoneda
-        search_text = "MontoGravado1OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoGravado1OtraMoneda
+        # search_text = "MontoGravado1OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoGravado1OtraMoneda').text = value
-                print(f'MontoGravado1OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoGravado1OtraMoneda').text = value
+        #         print(f'MontoGravado1OtraMoneda : {value}')
+        #         break
     
-        # Write MontoGravado2OtraMoneda
-        search_text = "MontoGravado2OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoGravado2OtraMoneda
+        # search_text = "MontoGravado2OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoGravado2OtraMoneda').text = value
-                print(f'MontoGravado2OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoGravado2OtraMoneda').text = value
+        #         print(f'MontoGravado2OtraMoneda : {value}')
+        #         break
     
-        # Write MontoGravado3OtraMoneda
-        search_text = "MontoGravado3OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoGravado3OtraMoneda
+        # search_text = "MontoGravado3OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoGravado3OtraMoneda').text = value
-                print(f'MontoGravado3OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoGravado3OtraMoneda').text = value
+        #         print(f'MontoGravado3OtraMoneda : {value}')
+        #         break
     
-        # Write MontoExentoOtraMoneda
-        search_text = "MontoExentoOtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoExentoOtraMoneda
+        # search_text = "MontoExentoOtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoExentoOtraMoneda').text = value
-                print(f'MontoExentoOtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoExentoOtraMoneda').text = value
+        #         print(f'MontoExentoOtraMoneda : {value}')
+        #         break
     
-        # Write TotalITBISOtraMoneda
-        search_text = "TotalITBISOtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TotalITBISOtraMoneda
+        # search_text = "TotalITBISOtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TotalITBISOtraMoneda').text = value
-                print(f'TotalITBISOtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TotalITBISOtraMoneda').text = value
+        #         print(f'TotalITBISOtraMoneda : {value}')
+        #         break
 
-        # Write TotalITBIS1OtraMoneda
-        search_text = "TotalITBIS1OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TotalITBIS1OtraMoneda
+        # search_text = "TotalITBIS1OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TotalITBIS1OtraMoneda').text = value
-                print(f'TotalITBIS1OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TotalITBIS1OtraMoneda').text = value
+        #         print(f'TotalITBIS1OtraMoneda : {value}')
+        #         break
 
-        # Write TotalITBIS2OtraMoneda
-        search_text = "TotalITBIS2OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TotalITBIS2OtraMoneda
+        # search_text = "TotalITBIS2OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TotalITBIS2OtraMoneda').text = value
-                print(f'TotalITBIS2OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TotalITBIS2OtraMoneda').text = value
+        #         print(f'TotalITBIS2OtraMoneda : {value}')
+        #         break
 
-        # Write TotalITBIS3OtraMoneda
-        search_text = "TotalITBIS3OtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write TotalITBIS3OtraMoneda
+        # search_text = "TotalITBIS3OtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'TotalITBIS3OtraMoneda').text = value
-                print(f'TotalITBIS3OtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'TotalITBIS3OtraMoneda').text = value
+        #         print(f'TotalITBIS3OtraMoneda : {value}')
+        #         break
 
-        # Write MontoImpuestoAdicionalOtraMoneda
-        search_text = "MontoImpuestoAdicionalOtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoImpuestoAdicionalOtraMoneda
+        # search_text = "MontoImpuestoAdicionalOtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoImpuestoAdicionalOtraMoneda').text = value
-                print(f'MontoImpuestoAdicionalOtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoImpuestoAdicionalOtraMoneda').text = value
+        #         print(f'MontoImpuestoAdicionalOtraMoneda : {value}')
+        #         break
 
-        ImpuestosAdicionalesOtraMoneda = ET.SubElement(OtraMoneda, 'ImpuestosAdicionalesOtraMoneda')
+        # ImpuestosAdicionalesOtraMoneda = ET.SubElement(OtraMoneda, 'ImpuestosAdicionalesOtraMoneda')
 
-        search_text = "TipoImpuestoOtraMoneda[1]" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
+        # search_text = "TipoImpuestoOtraMoneda[1]" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
                 
-                ImpuestoAdicionalOtraMoneda_count = 4
-                col_index = col
-                while True :
-                    ImpuestoAdicionalOtraMoneda_count -= 1
-                    if ImpuestoAdicionalOtraMoneda_count < 0 :
-                        break
+        #         ImpuestoAdicionalOtraMoneda_count = 4
+        #         col_index = col
+        #         while True :
+        #             ImpuestoAdicionalOtraMoneda_count -= 1
+        #             if ImpuestoAdicionalOtraMoneda_count < 0 :
+        #                 break
 
-                    ImpuestoAdicionalOtraMoneda = ET.SubElement(ImpuestosAdicionalesOtraMoneda, 'ImpuestoAdicionalOtraMoneda')
+        #             ImpuestoAdicionalOtraMoneda = ET.SubElement(ImpuestosAdicionalesOtraMoneda, 'ImpuestoAdicionalOtraMoneda')
 
-                    # Write TipoImpuestoOtraMoneda
-                    value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = "" 
+        #             # Write TipoImpuestoOtraMoneda
+        #             value = str(sheet.cell(in_row, column= col_index).value)
+        #             if value != "#e" :
+                         
 
-                    ET.SubElement(ImpuestoAdicionalOtraMoneda, 'TipoImpuestoOtraMoneda').text = value
-                    print(f'TipoImpuestoOtraMoneda : {value}')
-                    col_index +=1
+        #             ET.SubElement(ImpuestoAdicionalOtraMoneda, 'TipoImpuestoOtraMoneda').text = value
+        #             print(f'TipoImpuestoOtraMoneda : {value}')
+        #             col_index +=1
                 
-                    # Write TasaImpuestoAdicionalOtraMoneda
-                    value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = "" 
+        #             # Write TasaImpuestoAdicionalOtraMoneda
+        #             value = str(sheet.cell(in_row, column= col_index).value)
+        #             if value != "#e" :
+                         
 
-                    ET.SubElement(ImpuestoAdicionalOtraMoneda, 'TasaImpuestoAdicionalOtraMoneda').text = value
-                    print(f'TasaImpuestoAdicionalOtraMoneda : {value}')
-                    col_index +=1
+        #             ET.SubElement(ImpuestoAdicionalOtraMoneda, 'TasaImpuestoAdicionalOtraMoneda').text = value
+        #             print(f'TasaImpuestoAdicionalOtraMoneda : {value}')
+        #             col_index +=1
 
-                    # Write MontoImpuestoSelectivoConsumoEspecificoOtraMoneda
-                    value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = "" 
+        #             # Write MontoImpuestoSelectivoConsumoEspecificoOtraMoneda
+        #             value = str(sheet.cell(in_row, column= col_index).value)
+        #             if value != "#e" :
+                         
 
-                    ET.SubElement(ImpuestoAdicionalOtraMoneda, 'MontoImpuestoSelectivoConsumoEspecificoOtraMoneda').text = value
-                    print(f'MontoImpuestoSelectivoConsumoEspecificoOtraMoneda : {value}')
-                    col_index +=1
+        #             ET.SubElement(ImpuestoAdicionalOtraMoneda, 'MontoImpuestoSelectivoConsumoEspecificoOtraMoneda').text = value
+        #             print(f'MontoImpuestoSelectivoConsumoEspecificoOtraMoneda : {value}')
+        #             col_index +=1
 
-                    # Write MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda
-                    value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = "" 
+        #             # Write MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda
+        #             value = str(sheet.cell(in_row, column= col_index).value)
+        #             if value != "#e" :
+                         
 
-                    ET.SubElement(ImpuestoAdicionalOtraMoneda, 'MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda').text = value
-                    print(f'MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda : {value}')
-                    col_index +=1
+        #             ET.SubElement(ImpuestoAdicionalOtraMoneda, 'MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda').text = value
+        #             print(f'MontoImpuestoSelectivoConsumoAdvaloremOtraMoneda : {value}')
+        #             col_index +=1
 
-                    # Write OtrosImpuestosAdicionalesOtraMoneda
-                    value = str(sheet.cell(in_row, column= col_index).value)
-                    if value == "#e" :
-                        value = "" 
+        #             # Write OtrosImpuestosAdicionalesOtraMoneda
+        #             value = str(sheet.cell(in_row, column= col_index).value)
+        #             if value != "#e" :
+                         
 
-                    ET.SubElement(ImpuestoAdicionalOtraMoneda, 'OtrosImpuestosAdicionalesOtraMoneda').text = value
-                    print(f'OtrosImpuestosAdicionalesOtraMoneda : {value}')
+        #             ET.SubElement(ImpuestoAdicionalOtraMoneda, 'OtrosImpuestosAdicionalesOtraMoneda').text = value
+        #             print(f'OtrosImpuestosAdicionalesOtraMoneda : {value}')
 
-        # Write MontoTotalOtraMoneda
-        search_text = "MontoTotalOtraMoneda" 
-        for col in range(1, sheet.max_column + 1):
-            cell_value = sheet.cell(1, column=col).value
-            if cell_value == search_text:
-                value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = "" 
+        # # Write MontoTotalOtraMoneda
+        # search_text = "MontoTotalOtraMoneda" 
+        # for col in range(1, sheet.max_column + 1):
+        #     cell_value = sheet.cell(1, column=col).value
+        #     if cell_value == search_text:
+        #         value = str(sheet.cell(in_row, column=col).value)
+        #         if value != "#e" :
+                     
 
-                ET.SubElement(OtraMoneda, 'MontoTotalOtraMoneda').text = value
-                print(f'MontoTotalOtraMoneda : {value}')
-                break
+        #         ET.SubElement(OtraMoneda, 'MontoTotalOtraMoneda').text = value
+        #         print(f'MontoTotalOtraMoneda : {value}')
+        #         break
 
         # """
         DetallesItems = ET.SubElement(root, 'DetallesItems')
@@ -1583,144 +1389,118 @@ class ECF31:
                         break
                     Item = ET.SubElement(DetallesItems, 'Item')
 
-                    value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
+                    print(f"First Column number : {col_index}")
 
-                    ET.SubElement(Item, 'NumeroLinea').text = value
-                    print(f'NumeroLinea : {value}')
-                    col_index += 1
-                    
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        ET.SubElement(Item, 'NumeroLinea').text = value
+                        print(f'NumeroLinea : {value}')
+                    col_index += 1                    
+                    # print(f"Column number : {col_index}")
 
                     # TablaCodigosItem
-                    TablaCodigosItem = ET.SubElement(Item, 'TablaCodigosItem')
-                    CodigosItem_count = 5;
+                    # TablaCodigosItem = ET.SubElement(Item, 'TablaCodigosItem')
+                    CodigosItem_count = 5
                     while True : 
                         CodigosItem_count -= 1
                         if CodigosItem_count < 0 : 
                             break
 
-                        CodigosItem = ET.SubElement(TablaCodigosItem, 'CodigosItem')
+                        # CodigosItem = ET.SubElement(TablaCodigosItem, 'CodigosItem')
                         
                         # TipoCodigo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(CodigosItem, 'TipoCodigo').text = value
-                        print(f'TipoCodigo : {value}')
+                        if value != "#e" :
+                            # ET.SubElement(CodigosItem, 'TipoCodigo').text = value
+                            print(f'TipoCodigo : {value}')
                         col_index += 1
-
+                        
                         # CodigoItem
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(CodigosItem, 'CodigoItem').text = value
-                        print(f'CodigoItem : {value}')
+                        if value != "#e" :
+                            # ET.SubElement(CodigosItem, 'CodigoItem').text = value
+                            print(f'CodigoItem : {value}')
                         col_index += 1
-
+                        
                     # IndicadorFacturacion
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'IndicadorFacturacion').text = value
-                    print(f'IndicadorFacturacion : {value}')
-                    col_index += 1
-
-                    Retencion = ET.SubElement(Item, 'Retencion')
-                    # IndicadorAgenteRetencionoPercepcion
-                    value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Retencion, 'IndicadorAgenteRetencionoPercepcion').text = value
-                    print(f'IndicadorAgenteRetencionoPercepcion : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'IndicadorFacturacion').text = value
+                        print(f'IndicadorFacturacion : {value}')
                     col_index += 1
                     
+                    # Retencion = ET.SubElement(Item, 'Retencion')
+                    # IndicadorAgenteRetencionoPercepcion
+                    value = str(sheet.cell(in_row, column=col_index).value)
+                    if value != "#e" :
+                        # ET.SubElement(Retencion, 'IndicadorAgenteRetencionoPercepcion').text = value
+                        print(f'IndicadorAgenteRetencionoPercepcion : {value}')
+                    col_index += 1
+                
                     # MontoITBISRetenido
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Retencion, 'MontoITBISRetenido').text = value
-                    print(f'MontoITBISRetenido : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Retencion, 'MontoITBISRetenido').text = value
+                        print(f'MontoITBISRetenido : {value}')
                     col_index += 1
 
                     # MontoISRRetenido
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Retencion, 'MontoISRRetenido').text = value
-                    print(f'MontoISRRetenido : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Retencion, 'MontoISRRetenido').text = value
+                        print(f'MontoISRRetenido : {value}')
                     col_index += 1
 
                     # NombreItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'NombreItem').text = value
-                    print(f'NombreItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'NombreItem').text = value
+                        print(f'NombreItem : {value}')
                     col_index += 1
 
                     # IndicadorBienoServicio
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'IndicadorBienoServicio').text = value
-                    print(f'IndicadorBienoServicio : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'IndicadorBienoServicio').text = value
+                        print(f'IndicadorBienoServicio : {value}')
                     col_index += 1
 
                     # DescripcionItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'DescripcionItem').text = value
-                    print(f'DescripcionItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'DescripcionItem').text = value
+                        print(f'DescripcionItem : {value}')
                     col_index += 1
 
                     # CantidadItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'CantidadItem').text = value
-                    print(f'CantidadItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'CantidadItem').text = value
+                        print(f'CantidadItem : {value}')
                     col_index += 1
 
                     # UnidadMedida
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'UnidadMedida').text = value
-                    print(f'UnidadMedida : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'UnidadMedida').text = value
+                        print(f'UnidadMedida : {value}')
                     col_index += 1
 
                     # CantidadReferencia
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'CantidadReferencia').text = value
-                    print(f'CantidadReferencia : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'CantidadReferencia').text = value
+                        print(f'CantidadReferencia : {value}')
                     col_index += 1
 
                     # UnidadReferencia
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'UnidadReferencia').text = value
-                    print(f'UnidadReferencia : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'UnidadReferencia').text = value
+                        print(f'UnidadReferencia : {value}')
                     col_index += 1
 
-                    TablaSubcantidad = ET.SubElement(Item, 'TablaSubcantidad')
+                    # TablaSubcantidad = ET.SubElement(Item, 'TablaSubcantidad')
 
                     SubcantidadItem_count = 5
                     while True : 
@@ -1728,117 +1508,92 @@ class ECF31:
                         if SubcantidadItem_count < 0 :
                             break
 
-                        SubcantidadItem = ET.SubElement(TablaSubcantidad, 'SubcantidadItem')
+                        # SubcantidadItem = ET.SubElement(TablaSubcantidad, 'SubcantidadItem')
                         
                         # Subcantidad
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubcantidadItem, 'Subcantidad').text = value
-                        print(f'Subcantidad : {value}')
+                        if value != "#e" :
+                            # ET.SubElement(SubcantidadItem, 'Subcantidad').text = value
+                            print(f'Subcantidad : {value}')
                         col_index += 1
                         
                         # CodigoSubcantidad
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubcantidadItem, 'CodigoSubcantidad').text = value
-                        print(f'CodigoSubcantidad : {value}')
+                        if value != "#e" :
+                            # ET.SubElement(SubcantidadItem, 'CodigoSubcantidad').text = value
+                            print(f'CodigoSubcantidad : {value}')
                         col_index += 1
 
                     # GradosAlcohol
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'GradosAlcohol').text = value
-                    print(f'GradosAlcohol : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'GradosAlcohol').text = value
+                        print(f'GradosAlcohol : {value}')
                     col_index += 1
 
                     # PrecioUnitarioReferencia
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'PrecioUnitarioReferencia').text = value
-                    print(f'PrecioUnitarioReferencia : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'PrecioUnitarioReferencia').text = value
+                        print(f'PrecioUnitarioReferencia : {value}')
                     col_index += 1
 
                     # FechaElaboracion
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'FechaElaboracion').text = value
-                    print(f'FechaElaboracion : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'FechaElaboracion').text = value
+                        print(f'FechaElaboracion : {value}')
                     col_index += 1
 
                     # FechaVencimientoItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'FechaVencimientoItem').text = value
-                    print(f'FechaVencimientoItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'FechaVencimientoItem').text = value
+                        print(f'FechaVencimientoItem : {value}')
                     col_index += 1
 
-                    
                     # Mineria = ET.SubElement(Item, 'Mineria')
                     
                     # PesoNetoKilogramo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    # ET.SubElement(Mineria, 'PesoNetoKilogramo').text = value
-                    print(f'PesoNetoKilogramo : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Mineria, 'PesoNetoKilogramo').text = value
+                        print(f'PesoNetoKilogramo : {value}')
                     col_index += 1
                     
                     # PesoNetoMineria
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    # ET.SubElement(Mineria, 'PesoNetoMineria').text = value
-                    print(f'PesoNetoMineria : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Mineria, 'PesoNetoMineria').text = value
+                        print(f'PesoNetoMineria : {value}')
                     col_index += 1
 
                     # TipoAfiliacion
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    # ET.SubElement(Mineria, 'TipoAfiliacion').text = value
-                    print(f'TipoAfiliacion : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Mineria, 'TipoAfiliacion').text = value
+                        print(f'TipoAfiliacion : {value}')
                     col_index += 1
 
                     # Liquidacion
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    # ET.SubElement(Mineria, 'Liquidacion').text = value
-                    print(f'Liquidacion : {value}')
+                    if value != "#e" :
+                        # ET.SubElement(Mineria, 'Liquidacion').text = value
+                        print(f'Liquidacion : {value}')
                     col_index += 1
-
                     
                     # PrecioUnitarioItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-                    ET.SubElement(Item, 'PrecioUnitarioItem').text = value
-                    print(f'PrecioUnitarioItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'PrecioUnitarioItem').text = value
+                        print(f'PrecioUnitarioItem : {value}')
                     col_index += 1
 
                     # DescuentoMonto
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'DescuentoMonto').text = value
-                    print(f'DescuentoMonto : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'DescuentoMonto').text = value
+                        print(f'DescuentoMonto : {value}')
                     col_index += 1
 
                     TablaSubDescuento = ET.SubElement(Item, 'TablaSubDescuento')
@@ -1855,39 +1610,30 @@ class ECF31:
 
                         # TipoSubDescuento
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubDescuento, 'TipoSubDescuento').text = value
-                        print(f'TipoSubDescuento : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubDescuento, 'TipoSubDescuento').text = value
+                            print(f'TipoSubDescuento : {value}')
                         col_index += 1
 
                         # SubDescuentoPorcentaje
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubDescuento, 'SubDescuentoPorcentaje').text = value
-                        print(f'SubDescuentoPorcentaje : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubDescuento, 'SubDescuentoPorcentaje').text = value
+                            print(f'SubDescuentoPorcentaje : {value}')
                         col_index += 1
 
                         # MontoSubDescuento
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubDescuento, 'MontoSubDescuento').text = value
-                        print(f'MontoSubDescuento : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubDescuento, 'MontoSubDescuento').text = value
+                            print(f'MontoSubDescuento : {value}')
                         col_index += 1
-
 
                     # RecargoMonto
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'RecargoMonto').text = value
-                    print(f'RecargoMonto : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'RecargoMonto').text = value
+                        print(f'RecargoMonto : {value}')
                     col_index += 1
 
                     TablaSubRecargo = ET.SubElement(Item, 'TablaSubRecargo')
@@ -1902,98 +1648,81 @@ class ECF31:
 
                         # TipoSubRecargo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubRecargo, 'TipoSubRecargo').text = value
-                        print(f'TipoSubRecargo : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'TipoSubRecargo').text = value
+                            print(f'TipoSubRecargo : {value}')
                         col_index += 1
 
                         # SubRecargoPorcentaje
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubRecargo, 'SubRecargoPorcentaje').text = value
-                        print(f'SubRecargoPorcentaje : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'SubRecargoPorcentaje').text = value
+                            print(f'SubRecargoPorcentaje : {value}')
                         col_index += 1
-
                         
                         # MontosubRecargo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(SubRecargo, 'MontosubRecargo').text = value
-                        print(f'MontosubRecargo : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'MontoSubRecargo').text = value
+                            print(f'MontoSubRecargo\ : {value}')
                         col_index += 1
 
-                    TablaImpuestoAdicional = ET.SubElement(Item, 'TablaImpuestoAdicional')
+                    # TablaImpuestoAdicional = ET.SubElement(Item, 'TablaImpuestoAdicional')
 
                     ImpuestoAdicional_count = 2
                     while True :
                         ImpuestoAdicional_count -= 1
                         if ImpuestoAdicional_count < 0 : 
                             break
-                        ImpuestoAdicional =  ET.SubElement(TablaImpuestoAdicional, 'ImpuestoAdicional')                                   
+                        # ImpuestoAdicional =  ET.SubElement(TablaImpuestoAdicional, 'ImpuestoAdicional')                                   
                         # MontosubRecargo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = value
-                        print(f'TipoImpuesto : {value}')
+                        if value != "#e" :
+                            ET.SubElement(ImpuestoAdicional, 'TipoImpuesto').text = value
+                            print(f'TipoImpuesto : {value}')
                         col_index += 1
                     
                     OtraMonedaDetalle = ET.SubElement(Item, 'OtraMonedaDetalle')
 
                     # PrecioOtraMoneda
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(OtraMonedaDetalle, 'PrecioOtraMoneda').text = value
-                    print(f'PrecioOtraMoneda : {value}')
+                    if value != "#e" :
+                        ET.SubElement(OtraMonedaDetalle, 'PrecioOtraMoneda').text = value
+                        print(f'PrecioOtraMoneda : {value}')
                     col_index += 1
 
                     # DescuentoOtraMoneda
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(OtraMonedaDetalle, 'DescuentoOtraMoneda').text = value
-                    print(f'DescuentoOtraMoneda : {value}')
+                    if value != "#e" :
+                        ET.SubElement(OtraMonedaDetalle, 'DescuentoOtraMoneda').text = value
+                        print(f'DescuentoOtraMoneda : {value}')
                     col_index += 1
 
                     # RecargoOtraMoneda
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(OtraMonedaDetalle, 'RecargoOtraMoneda').text = value
-                    print(f'RecargoOtraMoneda : {value}')
+                    if value != "#e" :
+                        ET.SubElement(OtraMonedaDetalle, 'RecargoOtraMoneda').text = value
+                        print(f'RecargoOtraMoneda : {value}')
 
                     col_index += 1
                     # MontoItemOtraMoneda
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(OtraMonedaDetalle, 'MontoItemOtraMoneda').text = value
-                    print(f'MontoItemOtraMoneda : {value}')
+                    if value != "#e" :
+                        ET.SubElement(OtraMonedaDetalle, 'MontoItemOtraMoneda').text = value
+                        print(f'MontoItemOtraMoneda : {value}')
                     col_index += 1
                     
+                    print(f"Last Column number : {col_index}")
                     # MontoItem
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = "" 
-
-                    ET.SubElement(Item, 'MontoItem').text = value
-                    print(f'MontoItem : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Item, 'MontoItem').text = value
+                        print(f'MontoItem : {value}')
                     col_index += 1
+                    
         
-        Subtotales = ET.SubElement(root, 'Subtotales')
-        Subtotal = ET.SubElement(Subtotales, 'Subtotal')
+        # Subtotales = ET.SubElement(root, 'Subtotales')
+        # Subtotal = ET.SubElement(Subtotales, 'Subtotal')
 
         # Write NumeroSubTotal
         search_text = "NumeroSubTotal" 
@@ -2001,10 +1730,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'NumeroSubTotal').text = value
-                print(f'Version : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'NumeroSubTotal').text = value
+                    print(f'Version : {cell_value}')
                 break
         
         # Write DescripcionSubtotal
@@ -2013,10 +1741,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'DescripcionSubtotal').text = value
-                print(f'DescripcionSubtotal : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'DescripcionSubtotal').text = value
+                    print(f'DescripcionSubtotal : {cell_value}')
                 break
         
         # Write Orden
@@ -2025,10 +1752,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'Orden').text = value
-                print(f'Orden : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'Orden').text = value
+                    print(f'Orden : {cell_value}')
                 break
         
         # Write SubTotalMontoGravadoTotal
@@ -2037,10 +1763,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalMontoGravadoTotal').text = value
-                print(f'SubTotalMontoGravadoTotal : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotalMontoGravadoTotal').text = value
+                    print(f'SubTotalMontoGravadoTotal : {cell_value}')
                 break
     
         # Write SubTotalMontoGravadoI1
@@ -2049,10 +1774,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalMontoGravadoI1').text = value
-                print(f'SubTotalMontoGravadoI1 : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotalMontoGravadoI1').text = value
+                    print(f'SubTotalMontoGravadoI1 : {cell_value}')
                 break
     
         # Write SubTotalMontoGravadoI2
@@ -2061,10 +1785,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalMontoGravadoI2').text = value
-                print(f'SubTotalMontoGravadoI2 : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotalMontoGravadoI2').text = value
+                    print(f'SubTotalMontoGravadoI2 : {cell_value}')
                 break
     
         # Write SubTotalMontoGravadoI3
@@ -2073,10 +1796,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalMontoGravadoI3').text = value
-                print(f'SubTotalMontoGravadoI3 : {cell_value}')
+                if value != "#e" :
+                    T.SubElement(Subtotal, 'SubTotalMontoGravadoI3').text = value
+                    print(f'SubTotalMontoGravadoI3 : {cell_value}')
                 break
     
         # Write SubTotaITBIS
@@ -2085,10 +1807,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotaITBIS').text = value
-                print(f'SubTotaITBIS : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotaITBIS').text = value
+                    print(f'SubTotaITBIS : {cell_value}')
                 break
 
         # Write SubTotaITBIS1
@@ -2097,10 +1818,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotaITBIS1').text = value
-                print(f'SubTotaITBIS1 : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotaITBIS1').text = value
+                    print(f'SubTotaITBIS1 : {cell_value}')
                 break
 
         # Write SubTotaITBIS2
@@ -2109,10 +1829,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotaITBIS2').text = value
-                print(f'SubTotaITBIS2 : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotaITBIS2').text = value
+                    print(f'SubTotaITBIS2 : {cell_value}')
                 break
 
         # Write SubTotaITBIS3
@@ -2121,10 +1840,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotaITBIS3').text = value
-                print(f'SubTotaITBIS3 : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotaITBIS3').text = value
+                    print(f'SubTotaITBIS3 : {cell_value}')
                 break
 
         # Write SubTotalImpuestoAdicional
@@ -2133,10 +1851,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalImpuestoAdicional').text = value
-                print(f'SubTotalImpuestoAdicional : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotalImpuestoAdicional').text = value
+                    print(f'SubTotalImpuestoAdicional : {cell_value}')
                 break
 
         # Write SubTotalExento
@@ -2145,10 +1862,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'SubTotalExento').text = value
-                print(f'SubTotalExento : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'SubTotalExento').text = value
+                    print(f'SubTotalExento : {cell_value}')
                 break
 
         # Write MontoSubTotal
@@ -2157,10 +1873,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'MontoSubTotal').text = value
-                print(f'MontoSubTotal : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'MontoSubTotal').text = value
+                    print(f'MontoSubTotal : {cell_value}')
                 break
 
         # Write Lineas
@@ -2169,10 +1884,9 @@ class ECF31:
             cell_value = sheet.cell(1, column=col).value
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
-                if value == "#e" :
-                    value = ""             
-                ET.SubElement(Subtotal, 'Lineas').text = value
-                print(f'Lineas : {cell_value}')
+                if value != "#e" :
+                    ET.SubElement(Subtotal, 'Lineas').text = value
+                    print(f'Lineas : {cell_value}')
                 break
 
         DescuentosORecargos = ET.SubElement(root, 'DescuentosORecargos')
@@ -2193,77 +1907,69 @@ class ECF31:
 
                     # NumeroLinea
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'NumeroLinea').text = value
-                    print(f'NumeroLinea : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'NumeroLinea').text = value
+                        print(f'NumeroLinea : {cell_value}')
                     col_index +=1
 
                     # TipoAjuste
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'TipoAjuste').text = value
-                    print(f'TipoAjuste : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'TipoAjuste').text = value
+                        print(f'TipoAjuste : {cell_value}')
                     col_index +=1
                     
                     # IndicadorNorma1007
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'IndicadorNorma1007').text = value
-                    print(f'IndicadorNorma1007 : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'IndicadorNorma1007').text = value
+                        print(f'IndicadorNorma1007 : {cell_value}')
                     col_index +=1
                             
                     # DescripcionDescuentooRecargo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'DescripcionDescuentooRecargo').text = value
-                    print(f'DescripcionDescuentooRecargo : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'DescripcionDescuentooRecargo').text = value
+                        print(f'DescripcionDescuentooRecargo : {cell_value}')
                     col_index +=1
                                             
                     # TipoValor
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'TipoValor').text = value
-                    print(f'TipoValor : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'TipoValor').text = value
+                        print(f'TipoValor : {cell_value}')
                     col_index +=1
                                                         
                     # ValorDescuentooRecargo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'ValorDescuentooRecargo').text = value
-                    print(f'ValorDescuentooRecargo : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'ValorDescuentooRecargo').text = value
+                        print(f'ValorDescuentooRecargo : {cell_value}')
                     col_index +=1
                                                                 
                     # MontoDescuentooRecargo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'MontoDescuentooRecargo').text = value
-                    print(f'MontoDescuentooRecargo : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'MontoDescuentooRecargo').text = value
+                        print(f'MontoDescuentooRecargo : {cell_value}')
                     col_index +=1
                                                                             
                     # MontoDescuentooRecargoOtraMoneda
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'MontoDescuentooRecargoOtraMoneda').text = value
-                    print(f'MontoDescuentooRecargoOtraMoneda : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'MontoDescuentooRecargoOtraMoneda').text = value
+                        print(f'MontoDescuentooRecargoOtraMoneda : {cell_value}')
                     col_index +=1        
 
                     # IndicadorFacturacionDescuentooRecargo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(DescuentoORecargo, 'IndicadorFacturacionDescuentooRecargo').text = value
-                    print(f'IndicadorFacturacionDescuentooRecargo : {cell_value}')         
+                    if value != "#e" :
+                        ET.SubElement(DescuentoORecargo, 'IndicadorFacturacionDescuentooRecargo').text = value
+                        print(f'IndicadorFacturacionDescuentooRecargo : {cell_value}')
+                    col_index +=1           
         
 
-        Paginacion = ET.SubElement(root, 'Paginacion')
+        # Paginacion = ET.SubElement(root, 'Paginacion')
         Pagina_count = 2
 
         search_text = "PaginaNo[1]" 
@@ -2279,184 +1985,163 @@ class ECF31:
                     if Pagina_count < 0:
                         break
 
-                    Pagina = ET.SubElement(Paginacion, 'Pagina')
+                    # Pagina = ET.SubElement(Paginacion, 'Pagina')
 
                     # PaginNo
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'PaginaNo').text = value
-                    print(f'PaginaNo : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'PaginaNo').text = value
+                        print(f'PaginaNo : {cell_value}')
                     print(f'PaginaNo col_index : {col_index}')
                     col_index += 1
 
                     # NoLineaDesde
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'NoLineaDesde').text = value
-                    print(f'NoLineaDesde : {cell_value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'NoLineaDesde').text = value
+                        print(f'NoLineaDesde : {cell_value}')
                     col_index += 1
 
                     # NoLineaHasta
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'NoLineaHasta').text = value
-                    print(f'NoLineaHasta : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'NoLineaHasta').text = value
+                        print(f'NoLineaHasta : {value}')
                     col_index += 1
                     
                     # SubtotalMontoGravadoPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalMontoGravadoPagina').text = value
-                    print(f'SubtotalMontoGravadoPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalMontoGravadoPagina').text = value
+                        print(f'SubtotalMontoGravadoPagina : {value}')
                     col_index += 1
                                     
                     # SubtotalMontoGravado1Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalMontoGravado1Pagina').text = value
-                    print(f'SubtotalMontoGravado1Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalMontoGravado1Pagina').text = value
+                        print(f'SubtotalMontoGravado1Pagina : {value}')
                     col_index += 1
                                                     
                     # SubtotalMontoGravado2Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalMontoGravado2Pagina').text = value
-                    print(f'SubtotalMontoGravado2Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalMontoGravado2Pagina').text = value
+                        print(f'SubtotalMontoGravado2Pagina : {value}')
                     col_index += 1
                                                     
                     # SubtotalMontoGravado3Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalMontoGravado3Pagina').text = value
-                    print(f'SubtotalMontoGravado3Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalMontoGravado3Pagina').text = value
+                        print(f'SubtotalMontoGravado3Pagina : {value}')
                     col_index += 1
                                                                     
                     # SubtotalExentoPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalExentoPagina').text = value
-                    print(f'SubtotalExentoPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalExentoPagina').text = value
+                        print(f'SubtotalExentoPagina : {value}')
                     col_index += 1
                                                                 
                     # SubtotalItbisPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalItbisPagina').text = value
-                    print(f'SubtotalItbisPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalItbisPagina').text = value
+                        print(f'SubtotalItbisPagina : {value}')
                     col_index += 1
                                                                         
                     # SubtotalItbis1Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalItbis1Pagina').text = value
-                    print(f'SubtotalItbis1Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalItbis1Pagina').text = value
+                        print(f'SubtotalItbis1Pagina : {value}')
                     col_index += 1
                                                                                         
                     # SubtotalItbis2Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalItbis2Pagina').text = value
-                    print(f'SubtotalItbis2Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalItbis2Pagina').text = value
+                        print(f'SubtotalItbis2Pagina : {value}')
                     col_index += 1
                                                                                             
                     # SubtotalItbis3Pagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalItbis3Pagina').text = value
-                    print(f'SubtotalItbis3Pagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalItbis3Pagina').text = value
+                        print(f'SubtotalItbis3Pagina : {value}')
                     col_index += 1
                                                                                                             
                     # SubtotalImpuestoAdicionalPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""             
-                    ET.SubElement(Pagina, 'SubtotalImpuestoAdicionalPagina').text = value
-                    print(f'SubtotalImpuestoAdicionalPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalImpuestoAdicionalPagina').text = value
+                        print(f'SubtotalImpuestoAdicionalPagina : {value}')
                     col_index += 1
 
-                    SubtotalImpuestoAdicional = ET.SubElement(Pagina, 'SubtotalImpuestoAdicional')
+                    # SubtotalImpuestoAdicional = ET.SubElement(Pagina, 'SubtotalImpuestoAdicional')
                     
                     # SubtotalImpuestoSelectivoConsumoEspecificoPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""     
-                    ET.SubElement(SubtotalImpuestoAdicional, 'SubtotalImpuestoSelectivoConsumoEspecificoPagina').text =value
-                    print(f'SubtotalImpuestoSelectivoConsumoEspecificoPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(SubtotalImpuestoAdicional, 'SubtotalImpuestoSelectivoConsumoEspecificoPagina').text =value
+                        print(f'SubtotalImpuestoSelectivoConsumoEspecificoPagina : {value}')
                     col_index += 1
 
                     # SubtotalOtrosImpuesto
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""     
-                    ET.SubElement(SubtotalImpuestoAdicional, 'SubtotalOtrosImpuesto').text =value
-                    print(f'SubtotalOtrosImpuesto : {value}')
+                    if value != "#e" :
+                        ET.SubElement(SubtotalImpuestoAdicional, 'SubtotalOtrosImpuesto').text =value
+                        print(f'SubtotalOtrosImpuesto : {value}')
                     col_index += 1
 
                     # MontoSubtotalPagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""     
-                    ET.SubElement(Pagina, 'MontoSubtotalPagina').text =value
-                    print(f'MontoSubtotalPagina : {value}')
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'MontoSubtotalPagina').text =value
+                        print(f'MontoSubtotalPagina : {value}')
                     col_index += 1
 
                     # SubtotalMontoNoFacturablePagina
                     value = str(sheet.cell(in_row, column=col_index).value)
-                    if value == "#e" :
-                        value = ""     
-                    ET.SubElement(Pagina, 'SubtotalMontoNoFacturablePagina').text =value
-                    print(f'SubtotalMontoNoFacturablePagina : {value}')
-                    print(f'SubtotalMontoNoFacturablePagina _ index : {col_index}')
-                    # col_index += 1
+                    if value != "#e" :
+                        ET.SubElement(Pagina, 'SubtotalMontoNoFacturablePagina').text =value
+                        print(f'SubtotalMontoNoFacturablePagina : {value}')
+                        print(f'SubtotalMontoNoFacturablePagina _ index : {col_index}')
+                    col_index += 1
 
-        InformacionReferencia = ET.SubElement(root, 'InformacionReferencia')
+        # InformacionReferencia = ET.SubElement(root, 'InformacionReferencia')
         
         # NCFModificado
         col_index += 1
         value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'NCFModificado').text =value
-        print(f'NCFModificado : {value}')
+        if value != "#e" :
+            ET.SubElement(InformacionReferencia, 'NCFModificado').text =value
+            print(f'NCFModificado : {value}')
         col_index += 1
             
         # RNCOtroContribuyente
         value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'RNCOtroContribuyente').text =value
-        print(f'RNCOtroContribuyente : {value}')
+        if value != "#e" :
+            ET.SubElement(InformacionReferencia, 'RNCOtroContribuyente').text =value
+            print(f'RNCOtroContribuyente : {value}')
         col_index += 1
             
         # FechaNCFModificado
         value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'FechaNCFModificado').text =value
-        print(f'FechaNCFModificado : {value}')
+        if value != "#e" :
+            ET.SubElement(InformacionReferencia, 'FechaNCFModificado').text =value
+            print(f'FechaNCFModificado : {value}')
         col_index += 1
             
         # CodigoModificacion
         value = str(sheet.cell(in_row, column=col_index).value)
-        if value == "#e" :
-            value = ""     
-        ET.SubElement(InformacionReferencia, 'CodigoModificacion').text =value
-        print(f'CodigoModificacion : {value}')
+        if value != "#e" :
+            ET.SubElement(InformacionReferencia, 'CodigoModificacion').text =value
+            print(f'CodigoModificacion : {value}')
         col_index += 1
 
-        ET.SubElement(root, 'FechaHoraFirma').text =""
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
         
 
         rough_string = ET.tostring(root, 'utf-8')

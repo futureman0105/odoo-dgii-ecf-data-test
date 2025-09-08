@@ -160,7 +160,7 @@ class DGIICFService:
         xml_file_path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}_signed.xml')
 
         with open(xml_file_path, 'rb') as f:
-            files = {'xml': ('signed.xml', f, 'text/xml')}
+            files = {'xml': (f'{self.invoice_name}.xml', f, 'text/xml')}
             headers = {
                 'accept': 'application/json',
                 "Authorization": f"Bearer {token}"

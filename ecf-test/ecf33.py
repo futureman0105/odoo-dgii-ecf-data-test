@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import logging
 import os
 from xml.dom import minidom
+from utility import clean_xml_safe 
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
@@ -33,7 +34,7 @@ class ECF33:
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
                 if value != "#e" :    
-                    ET.SubElement(encabezado, 'Version').text = '1.1'
+                    ET.SubElement(encabezado, 'Version').text = value
                     print(f'Version : {value}')
                     print(f'Version Col Index : {col}')
                 break
@@ -1217,6 +1218,7 @@ class ECF33:
                         value = "" 
                     ET.SubElement(ImpuestoAdicional, 'OtrosImpuestosAdicionales').text = value
                     print(f'OtrosImpuestosAdicionales : {value}')
+                    col_index +=1
 
         # Write MontoTotal
         search_text = "MontoTotal" 
@@ -2430,12 +2432,11 @@ class ECF33:
                     ET.SubElement(Pagina, 'SubtotalMontoNoFacturablePagina').text =value
                     print(f'SubtotalMontoNoFacturablePagina : {value}')
                     print(f'SubtotalMontoNoFacturablePagina _ index : {col_index}')
-                    col_index += 1
+                    # col_index += 1
 
         InformacionReferencia = ET.SubElement(root, 'InformacionReferencia')
         
         # NCFModificado
-        col_index += 1
         value = str(sheet.cell(in_row, column=col_index).value)
         if value == "#e" :
             value = ""     
@@ -2475,15 +2476,21 @@ class ECF33:
         print(f'RazonModificacion : {value}')
         col_index += 1
 
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
+       
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
+        pretty_xml_str = pretty_xml_as_str.decode('utf-8') if isinstance(pretty_xml_as_str, bytes) else pretty_xml_as_str
+
+        cleaned_xml = clean_xml_safe(pretty_xml_as_str)
+        print(cleaned_xml)
 
         self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
-            f.write(pretty_xml_as_str)
+            f.write(cleaned_xml.encode('utf-8'))
         
         xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return xml_str
+        return cleaned_xml

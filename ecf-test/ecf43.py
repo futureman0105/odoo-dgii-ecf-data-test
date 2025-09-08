@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import logging
 import os
 from xml.dom import minidom
+from utility import clean_xml_safe 
 
 workbook = openpyxl.load_workbook("test_data.xlsx")
 sheet = workbook["ECF"]
@@ -33,7 +34,7 @@ class ECF43:
             if cell_value == search_text:
                 value = str(sheet.cell(in_row, column=col).value)
                 if value != "#e" :    
-                    ET.SubElement(encabezado, 'Version').text = '1.1'
+                    ET.SubElement(encabezado, 'Version').text = value
                     print(f'Version : {value}')
                     print(f'Version Col Index : {col}')
                 break
@@ -768,7 +769,7 @@ class ECF43:
                     print(f'RecargoMonto : {value}')
                     col_index += 1
 
-                    # TablaSubRecargo = ET.SubElement(Item, 'TablaSubRecargo')
+                    TablaSubRecargo = ET.SubElement(Item, 'TablaSubRecargo')
 
                     SubRecargo_count = 5
 
@@ -776,34 +777,27 @@ class ECF43:
                         SubRecargo_count -= 1
                         if SubRecargo_count < 0 :
                             break    
-                        # SubRecargo = ET.SubElement(TablaSubRecargo, 'SubRecargo')
+                        SubRecargo = ET.SubElement(TablaSubRecargo, 'SubRecargo')
 
                         # TipoSubRecargo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        # ET.SubElement(SubRecargo, 'TipoSubRecargo').text = value
-                        print(f'TipoSubRecargo : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'TipoSubRecargo').text = value
+                            print(f'TipoSubRecargo : {value}')
                         col_index += 1
 
                         # SubRecargoPorcentaje
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        # ET.SubElement(SubRecargo, 'SubRecargoPorcentaje').text = value
-                        print(f'SubRecargoPorcentaje : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'SubRecargoPorcentaje').text = value
+                            print(f'SubRecargoPorcentaje : {value}')
                         col_index += 1
 
-                        
                         # MontosubRecargo
                         value = str(sheet.cell(in_row, column=col_index).value)
-                        if value == "#e" :
-                            value = "" 
-
-                        # ET.SubElement(SubRecargo, 'MontosubRecargo').text = value
-                        print(f'MontosubRecargo : {value}')
+                        if value != "#e" :
+                            ET.SubElement(SubRecargo, 'MontoSubRecargo').text = value
+                            print(f'MontoSubRecargo : {value}')
                         col_index += 1
 
                     # TablaImpuestoAdicional = ET.SubElement(Item, 'TablaImpuestoAdicional')
@@ -1138,15 +1132,21 @@ class ECF43:
         print(f'CodigoModificacion : {value}')
         col_index += 1
 
+        ET.SubElement(root, 'FechaHoraFirma').text ="08-09-2025 09:47:51"
+       
         rough_string = ET.tostring(root, 'utf-8')
         reparsed = minidom.parseString(rough_string)
         pretty_xml_as_str = reparsed.toprettyxml(indent="  ", encoding='utf-8')
+        pretty_xml_str = pretty_xml_as_str.decode('utf-8') if isinstance(pretty_xml_as_str, bytes) else pretty_xml_as_str
+
+        cleaned_xml = clean_xml_safe(pretty_xml_as_str)
+        print(cleaned_xml)
 
         self.invoice_name = f'{self.RNCEmisor}{self.ENCF}'
         path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}.xml')
         
         with open(path, 'wb') as f:
-            f.write(pretty_xml_as_str)
+            f.write(cleaned_xml.encode('utf-8'))
         
         xml_str = ET.tostring(root, encoding='utf-8').decode('utf-8')
-        return xml_str
+        return cleaned_xml
