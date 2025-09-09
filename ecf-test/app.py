@@ -21,9 +21,7 @@ from dgii_client import DGIICFService
 # from ecf45 import ECF45
 # from ecf46 import ECF46
 # from ecf47 import ECF47
-
-workbook = openpyxl.load_workbook("test_data.xlsx")
-sheet = workbook["RFCE"]
+from acecf import ACECF
 
 @dataclass
 class Param:
@@ -163,7 +161,7 @@ __token : str
 def main():
 
     try:
-        dgii_service = DGIICFService(dgii_env='prod', company_id=1)
+        dgii_service = DGIICFService(company_id=1)
 
         # Step 1: Get the seed
         semilla = dgii_service.get_semilla()
@@ -308,20 +306,43 @@ def main():
 
         # invoice_name = rfce_client.invoice_name
         # __logger.info(f"Invoice Name: {invoice_name}")
+        
+        # signed_xml = dgii_service.sign_xml(xml_str, invoice_name)
         # response = dgii_service.submit_rfce(token)
 
-                
-        xml_file_path = os.path.join(os.path.dirname(__file__), 'data/132641566E340000000016.xml')
+        
+        #############################################
+        ###########   ACECF              ############
+        ###########   ROW : 2 - 12       ############ 
+        #############################################
+
+        # acecf_client = ACECF()
+        # xml_str = acecf_client.create_acecf_xml(12)
+
+        # invoice_name = acecf_client.invoice_name
+        # __logger.info(f"Invoice Name: {invoice_name}")
+
+        # signed_xml = dgii_service.sign_xml(xml_str, invoice_name)
+        # response = dgii_service.submit_acecf(token)
+
+        
+        #############################################
+        ###########   File TEST          ############
+        ###########                      ############ 
+        #############################################
+
+        xml_file_path = os.path.join(os.path.dirname(__file__), 'data/132641566E320000000025.xml')
 
         with open(xml_file_path, 'r', encoding='utf-8') as file:
             xml_str = file.read()
         # Print or use the XML stringW
         print(xml_str)
         
-        invoice_name = "132641566E340000000016"
+        invoice_name = "132641566E320000000025"
         signed_xml = dgii_service.sign_xml(xml_str, invoice_name)
-        # response = dgii_service.submit_rfce(token)
-        response = dgii_service.submit_ecf(token)
+        # response = dgii_service.submit_ecf(token)
+
+        response = dgii_service.submit_rfce(token)
 
         trackId = ""
         response_data = json.loads(response.content.decode('utf-8'))
@@ -339,28 +360,8 @@ def main():
             return
 
         response = dgii_service.track_ecf(trackId, token)
-        # response = dgii_service.track_rfce(token, param)s
         __logger.info(f"track result: {response.content}")
-        
-        # while True:
-        #     __logger.info(f"checking status for trackId: {trackId} ...")
-        #     # Step 6: Track the status of e-CF to DGII using the token
-        #     response = dgii_service.track_ecf(trackId, token)
-        #     # response = dgii_service.track_rfce(token, param)
-        #     __logger.info(f"track result: {response.content}")
 
-        #     # response_data = json.loads(response.content.decode('utf-8'))
-
-        #     # estado = response_data.get('estado', '')
-        #     # __logger.info(f"Invoice {invoice_name} status: {estado}")
-        #     # if estado == 'ACEPTADO':
-        #     #     __logger.info(f"Invoice {invoice_name} accepted by DGII.")
-        #     #     break
-        #     # elif estado == 'RECHAZADO':
-        #     #     __logger.error(f"Invoice {invoice_name} rejected by DGII. Reason: {response_data.get('mensaje', 'No reason provided')}")
-        #     #     break
-
-        #     time.sleep(300)
     except Exception as e:
         __logger.error(f"Error processing invoice: {str(e)}")
 
