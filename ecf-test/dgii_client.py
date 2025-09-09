@@ -6,7 +6,7 @@ from lxml import etree
 from logger import __logger
 
 class DGIICFService:
-    def __init__(self, dgii_env='test', company_id=None, env=None):
+    def __init__(self, dgii_env='cert', company_id=None, env=None):
         """
         Initialize the DGII service with environment, company, and config data.
         """
@@ -16,14 +16,14 @@ class DGIICFService:
             raise ValueError("Company ID is required")
              
         self.base_url = {
-            'test': 'https://ecf.dgii.gov.do/testeCF',
-            'prod': 'https://ecf.dgii.gov.do/CerteCF'
+            'cert': 'https://ecf.dgii.gov.do/CerteCF',
+            'prod': 'https://ecf.dgii.gov.do/ecf'
         }[dgii_env]
 
         
         self.fc_base_url = {
-            'test': 'https://fc.dgii.gov.do/testeCF',
-            'prod': 'https://fc.dgii.gov.do/CerteCF'
+            'cert': 'https://fc.dgii.gov.do/CerteCF',
+            'prod': 'https://fc.dgii.gov.do/ecf'
         }[dgii_env]
         
 
@@ -199,31 +199,31 @@ class DGIICFService:
         self._logger.info(f"Track response from DGII: {res.content}")
 
         return res
-      
-    def track_rfce(self, token, param):
+ 
+    def submit_acecf(self, token):
         """
-        Track e-CF status from DGII.
+        Submit the signed ACECF XML to DGII.
         """
-        url = "https://fc.dgii.gov.do/CerteCF/consultarfce/api/Consultas/Consulta"
+        xml_file_path = os.path.join(os.path.dirname(__file__), f'data/{self.invoice_name}_signed.xml')
 
-        headers = {
-            'accept': 'application/json',
-            "Authorization": f"Bearer {token}"
-        }
-        
-        params = {
-            "RNC_Emisor": param.RNCEmisor,
-            "ENCF": param.ENCF,
-            "Cod_Seguridad_eCF": param.CodigoSeguridadeCF
-        }
+        with open(xml_file_path, 'rb') as f:
+            files = {'xml': (f'{self.invoice_name}.xml', f, 'text/xml')}
+            headers = {
+                'accept': 'application/json',
+                "Authorization": f"Bearer {token}"
+            }
 
-        print(params, token)
-       
-        response = requests.get(f"{url}?RNC_Emisor={param.RNCEmisor}&ENCF={param.ENCF}&Cod_Seguridad_eCF={param.CodigoSeguridadeCF}", 
-                                headers=headers)
+            try : 
+                res = requests.post(
+                    f"{self.base_url}/AprobacionComercial/api/aprobacioncomercial",
+                    files=files,
+                    headers=headers
+                )
 
-        # Print response status and JSON data
+                self._logger.info(f"RFCE response from DGII: {res.content}")
+            except Exception as e:
+                self._logger.error(f"Failed Validar Semilla response from DGII: {e}")
+                return
 
-
-        return response
-
+            return res
+    
